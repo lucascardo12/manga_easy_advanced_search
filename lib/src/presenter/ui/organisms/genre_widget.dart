@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class GenreWidget extends StatelessWidget {
   final String nameGenre;
@@ -15,11 +16,18 @@ class GenreWidget extends StatelessWidget {
           width: 20,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         const SizedBox(width: 5),
-        Expanded(child: Text(nameGenre))
+        Expanded(
+            child: Text(
+          nameGenre,
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge!
+              .copyWith(color: ThemeService.of.backgroundText),
+        ))
       ]),
     );
   }
