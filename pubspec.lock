@@ -29,6 +29,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+  coffee_cup:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: f05babd41c7dd198534830d6bc44c275f468c700
+      url: "https://github.com/lucascardo12/manga_easy_coffee_cup"
+    source: git
+    version: "1.0.0"
   collection:
     dependency: transitive
     description:
@@ -134,7 +143,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: "1.0.0"
       resolved-ref: "6dfeb38caa3a33b2553fe1eece1e5a41d64c0d9d"
       url: "https://github.com/lucascardo12/manga_easy_themes.git"
     source: git
