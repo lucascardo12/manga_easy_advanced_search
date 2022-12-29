@@ -1,34 +1,20 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/components/bottom_sheet_screen.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/components/icons_bottom_sheet_screen.dart';
 
 class FieldTextWidget extends StatelessWidget {
   const FieldTextWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: CoffeeSearchField(
+        suffixIcon: Padding(
+          padding: EdgeInsets.only(right: 6),
+          child: IconBottomSheetScreen(),
         ),
-        FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet<void>(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                ),
-                builder: (BuildContext context) {
-                  return const BottomSheetScreen();
-                });
-          },
-          child: const Icon(Icons.menu_rounded),
-        )
-      ],
+      ),
     );
   }
 }

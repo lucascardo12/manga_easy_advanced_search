@@ -34,7 +34,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: f05babd41c7dd198534830d6bc44c275f468c700
+      resolved-ref: "08519a743ea2569bb5b4cb55a75ff26bd14ad12a"
       url: "https://github.com/lucascardo12/manga_easy_coffee_cup"
     source: git
     version: "1.0.0"
@@ -52,13 +52,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -111,13 +104,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  grouped_buttons:
-    dependency: "direct main"
-    description:
-      name: grouped_buttons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
   http:
     dependency: transitive
     description:

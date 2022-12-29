@@ -1,3 +1,4 @@
+import 'package:coffee_cup/features/text/coffee_text.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
@@ -15,19 +16,13 @@ class GenreWidget extends StatelessWidget {
           height: 20,
           width: 20,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: Colors.white,
-          ),
+              borderRadius: BorderRadius.circular(25),
+              color: ThemeService.of.primaryText),
         ),
         const SizedBox(width: 5),
         Expanded(
-            child: Text(
-          nameGenre,
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(color: ThemeService.of.backgroundText),
-        ))
+            child:
+                CoffeeText(text: nameGenre, typography: CoffeeTypography.body))
       ]),
     );
   }

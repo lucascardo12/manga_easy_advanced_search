@@ -1,14 +1,17 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class CategoryMangas extends StatefulWidget {
-  const CategoryMangas({super.key});
+  final String nameCategory;
+  const CategoryMangas({super.key, required this.nameCategory});
 
   @override
   State<CategoryMangas> createState() => _CategoryMangasState();
 }
 
 class _CategoryMangasState extends State<CategoryMangas> {
-  bool isSelect = false;
+  bool isSelect = true;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -23,38 +26,32 @@ class _CategoryMangasState extends State<CategoryMangas> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: Colors.black,
+                  color: ThemeService.of.primaryColor,
                 ),
               ),
-              child: Text(
-                'shounem',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ))
+              child: CoffeeText(
+                  text: widget.nameCategory, typography: CoffeeTypography.body))
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: ThemeService.of.primaryColor,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: Colors.black,
+                  color: ThemeService.of.backgroundText,
                 ),
               ),
               child: RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: 'shounem',
+                      text: widget.nameCategory,
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
-                          .copyWith(color: Colors.white),
+                          .copyWith(color: ThemeService.of.primaryText),
                     ),
                     const WidgetSpan(
-                      child: Icon(Icons.check_rounded,
-                          size: 15, color: Colors.white),
+                      child: Icon(Icons.check_rounded, size: 15),
                     ),
                   ],
                 ),

@@ -9,30 +9,16 @@ class AvaliationSelect extends StatefulWidget {
 }
 
 class _AvaliationSelectState extends State<AvaliationSelect> {
-  int _value = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
-          children: [
-            const HornsRating(
-              hornClassification: 5,
-              ignoreGesture: true,
-              itemSize: 25,
+          children: const [
+            HornsRating(
+              hornClassification: 0,
+              itemSize: 30,
             ),
-            const SizedBox(width: 10),
-            const Text('ou maior'),
-            Radio(
-              activeColor: Colors.black,
-              value: 1,
-              groupValue: _value,
-              onChanged: (int? value) {
-                setState(() {
-                  _value = value!;
-                });
-              },
-            )
           ],
         ),
       ],
