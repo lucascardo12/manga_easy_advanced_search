@@ -22,17 +22,17 @@ class _CategoryMangasState extends State<CategoryMangas> {
       },
       child: isSelect
           ? Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: ThemeService.of.primaryColor,
+                  color: ThemeService.of.primaryText,
                 ),
               ),
               child: CoffeeText(
                   text: widget.nameCategory, typography: CoffeeTypography.body))
           : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: BoxDecoration(
                 color: ThemeService.of.primaryColor,
                 borderRadius: BorderRadius.circular(20),

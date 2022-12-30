@@ -43,7 +43,7 @@ class IconBottomSheetScreen extends StatelessWidget {
                             SeeMoreTextButton(),
                           ],
                         ),
-                        const CategoryMangas(nameCategory: 'shounem'),
+                        const CategoryMangas(nameCategory: 'Shounem'),
                         const SizedBox(height: 15),
                         const CoffeeText(
                             text: 'Avaliação',
