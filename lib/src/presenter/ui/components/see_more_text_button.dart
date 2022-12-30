@@ -18,16 +18,19 @@ class SeeMoreTextButton extends StatelessWidget {
             ),
             builder: (BuildContext context) {
               return Container(
-                height: MediaQuery.of(context).size.height * 0.4,
+                height: MediaQuery.of(context).size.height * 0.35,
                 padding: const EdgeInsets.all(5),
                 child: Column(
                   children: [
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     const CoffeeText(
                         text: 'Selecionar gêneros',
                         typography: CoffeeTypography.title),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     Wrap(
+                      runSpacing: 6,
+                      runAlignment: WrapAlignment.center,
+                      spacing: 6,
                       children: const [
                         CategoryMangas(nameCategory: 'shounem'),
                         CategoryMangas(nameCategory: 'shounem'),
