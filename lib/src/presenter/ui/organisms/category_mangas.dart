@@ -40,21 +40,15 @@ class _CategoryMangasState extends State<CategoryMangas> {
                   color: ThemeService.of.backgroundText,
                 ),
               ),
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: widget.nameCategory,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: ThemeService.of.primaryText),
-                    ),
-                    const WidgetSpan(
-                      child: Icon(Icons.check_rounded, size: 15),
-                    ),
-                  ],
-                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(widget.nameCategory),
+                  const Icon(
+                    Icons.check_rounded,
+                    size: 14,
+                  ),
+                ],
               ),
             ),
     );
