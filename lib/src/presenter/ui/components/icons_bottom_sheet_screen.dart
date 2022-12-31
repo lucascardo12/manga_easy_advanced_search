@@ -4,11 +4,16 @@ import 'package:manga_easy_advanced_search/src/presenter/ui/components/see_more_
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/avaliation_select.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/category_mangas.dart';
-import 'package:manga_easy_themes/manga_easy_themes.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/select_year.dart';
 
-class IconBottomSheetScreen extends StatelessWidget {
+class IconBottomSheetScreen extends StatefulWidget {
   const IconBottomSheetScreen({super.key});
 
+  @override
+  State<IconBottomSheetScreen> createState() => _IconBottomSheetScreenState();
+}
+
+class _IconBottomSheetScreenState extends State<IconBottomSheetScreen> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -58,16 +63,21 @@ class IconBottomSheetScreen extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  CoffeeText(
+                                children: [
+                                  const CoffeeText(
                                       text: 'Data',
                                       typography: CoffeeTypography.body),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   CoffeeButton(
-                                    margin: EdgeInsets.all(0),
-                                    padding: EdgeInsets.all(0),
-                                    label: 'Selecionar',
-                                  )
+                                      margin: const EdgeInsets.all(0),
+                                      padding: const EdgeInsets.all(0),
+                                      label: 'Selecionar',
+                                      onPress: () => showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return SelectYear();
+                                            },
+                                          ))
                                 ],
                               ),
                             ),

@@ -125,6 +125,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  manga_easy_sdk:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "324cdcecbc05c09fea92fbd728b5dd883b07d464"
+      url: "https://github.com/lucascardo12/manga_easy_sdk"
+    source: git
+    version: "1.0.0"
   manga_easy_themes:
     dependency: "direct main"
     description:
