@@ -2,7 +2,6 @@ import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/components/see_more_text_button.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/avaliation_select.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/category_mangas.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/select_year.dart';
 
@@ -54,9 +53,10 @@ class _IconBottomSheetScreenState extends State<IconBottomSheetScreen> {
                             text: 'Avaliação',
                             typography: CoffeeTypography.body),
                         const SizedBox(height: 10),
-                        const AvaliationSelect(),
-                        const SizedBox(height: 10),
-                        const SizedBox(height: 10),
+                        CoffeeRating(
+                          onRatingUpdate: (_) {},
+                        ),
+                        const SizedBox(height: 15),
                         Row(
                           children: [
                             Expanded(
@@ -72,6 +72,7 @@ class _IconBottomSheetScreenState extends State<IconBottomSheetScreen> {
                                       margin: const EdgeInsets.all(0),
                                       padding: const EdgeInsets.all(0),
                                       label: 'Selecionar',
+                                      
                                       onPress: () => showDialog(
                                             context: context,
                                             builder: (BuildContext context) {

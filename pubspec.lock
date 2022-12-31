@@ -34,7 +34,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d0a917a23f7a1acd27f1c05e31940cfb9ccc3f89
+      resolved-ref: "42731954c808a202b44ed716b47fb0eb57dd1dd1"
       url: "https://github.com/lucascardo12/manga_easy_coffee_cup"
     source: git
     version: "1.0.0"
