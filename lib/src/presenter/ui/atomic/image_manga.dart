@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ImageManga extends StatelessWidget {
-  const ImageManga({super.key});
+  final String imageManga;
+  const ImageManga({super.key, required this.imageManga});
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +10,9 @@ class ImageManga extends StatelessWidget {
       height: 200,
       width: 125,
       decoration: BoxDecoration(
-        image: const DecorationImage(
+        image: DecorationImage(
             image: NetworkImage(
-                'https://th.bing.com/th/id/OIP.8RVFFbW8QsrVJ86NieQLngHaLj?pid=ImgDet&rs=1'),
+                imageManga),
             fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(10),
       ),

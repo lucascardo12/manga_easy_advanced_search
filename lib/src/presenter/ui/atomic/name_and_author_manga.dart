@@ -2,19 +2,22 @@ import 'package:coffee_cup/features/text/coffee_text.dart';
 import 'package:flutter/material.dart';
 
 class NameAndAuthorManga extends StatelessWidget {
-  const NameAndAuthorManga({super.key});
+  final String nameManga;
+  final String nameAuthor;
+  const NameAndAuthorManga(
+      {super.key, required this.nameManga, required this.nameAuthor});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         CoffeeText(
-            text: 'One piece',
+            text: nameManga,
             typography: CoffeeTypography.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
         CoffeeText(
-            text: 'Echirro Oda',
+            text: nameAuthor,
             typography: CoffeeTypography.body,
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
