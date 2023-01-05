@@ -2,15 +2,15 @@ import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
-class CategoryMangas extends StatefulWidget {
+class CategorySelectSheetBotton extends StatefulWidget {
   final String nameCategory;
-  const CategoryMangas({super.key, required this.nameCategory});
+  const CategorySelectSheetBotton({super.key, required this.nameCategory});
 
   @override
-  State<CategoryMangas> createState() => _CategoryMangasState();
+  State<CategorySelectSheetBotton> createState() => _CategorySelectSheetBottonState();
 }
 
-class _CategoryMangasState extends State<CategoryMangas> {
+class _CategorySelectSheetBottonState extends State<CategorySelectSheetBotton> {
   bool isSelect = true;
   @override
   Widget build(BuildContext context) {

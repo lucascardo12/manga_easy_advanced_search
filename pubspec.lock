@@ -34,7 +34,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "42731954c808a202b44ed716b47fb0eb57dd1dd1"
+      resolved-ref: "23443de61c8f34a2c20c3eae46d440ba4a36590d"
       url: "https://github.com/lucascardo12/manga_easy_coffee_cup"
     source: git
     version: "1.0.0"
@@ -86,7 +86,7 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_rating_bar:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_rating_bar
       url: "https://pub.dartlang.org"
@@ -137,7 +137,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "324cdcecbc05c09fea92fbd728b5dd883b07d464"
+      resolved-ref: "84ebd1063be0bae6115734193ced20799070e7b3"
       url: "https://github.com/lucascardo12/manga_easy_sdk"
     source: git
     version: "1.0.0"

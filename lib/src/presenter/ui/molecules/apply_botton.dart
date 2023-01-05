@@ -13,7 +13,6 @@ class ApplyBottonn extends StatelessWidget {
         child: CoffeeButton(
           label: nameBotton,
           onPress: () => Navigator.of(context).pop(),
-          margin: const EdgeInsets.all(5),
         ),
       ),
     );

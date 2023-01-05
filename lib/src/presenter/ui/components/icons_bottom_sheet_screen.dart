@@ -2,8 +2,8 @@ import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/components/see_more_text_button.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/category_mangas.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/select_year.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/alert_dialog_select_year.dart';
 
 class IconBottomSheetScreen extends StatefulWidget {
   const IconBottomSheetScreen({super.key});
@@ -47,7 +47,8 @@ class _IconBottomSheetScreenState extends State<IconBottomSheetScreen> {
                             SeeMoreTextButton(),
                           ],
                         ),
-                        const CategoryMangas(nameCategory: 'Shounem'),
+                        const CategorySelectSheetBotton(
+                            nameCategory: 'Shounem'),
                         const SizedBox(height: 15),
                         const CoffeeText(
                             text: 'Avaliação',
@@ -69,20 +70,16 @@ class _IconBottomSheetScreenState extends State<IconBottomSheetScreen> {
                                       typography: CoffeeTypography.body),
                                   const SizedBox(height: 10),
                                   CoffeeButton(
-                                      margin: const EdgeInsets.all(0),
-                                      padding: const EdgeInsets.all(0),
                                       label: 'Selecionar',
-                                      
                                       onPress: () => showDialog(
                                             context: context,
                                             builder: (BuildContext context) {
-                                              return SelectYear();
+                                              return AlertDialogSelectYear();
                                             },
                                           ))
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 30),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,7 +100,9 @@ class _IconBottomSheetScreenState extends State<IconBottomSheetScreen> {
                             )
                           ],
                         ),
-                        const ApplyBottonn(nameBotton: 'Aplicar filtro')
+                        const ApplyBottonn(
+                          nameBotton: 'Aplicar filtro',
+                        ),
                       ],
                     ),
                   ),

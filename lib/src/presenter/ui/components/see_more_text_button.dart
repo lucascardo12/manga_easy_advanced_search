@@ -1,7 +1,7 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/category_mangas.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
 
 class SeeMoreTextButton extends StatelessWidget {
   const SeeMoreTextButton({super.key});
@@ -32,21 +32,21 @@ class SeeMoreTextButton extends StatelessWidget {
                       runAlignment: WrapAlignment.center,
                       spacing: 6,
                       children: const [
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
-                        CategoryMangas(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
+                        CategorySelectSheetBotton(nameCategory: 'shounem'),
                       ],
                     ),
                     const ApplyBottonn(nameBotton: 'Aplicar')

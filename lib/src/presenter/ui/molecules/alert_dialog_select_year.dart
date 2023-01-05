@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SelectYear extends StatelessWidget {
-  SelectYear({super.key});
+class AlertDialogSelectYear extends StatelessWidget {
+  AlertDialogSelectYear({super.key});
 
   final DateTime _selectedDate = DateTime.now();
   @override
