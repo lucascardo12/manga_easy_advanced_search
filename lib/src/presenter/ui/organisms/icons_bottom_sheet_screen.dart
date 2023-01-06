@@ -105,8 +105,7 @@ class IconBottomSheetScreen extends StatelessWidget {
                                   CoffeeField(
                                     hintText: 'Nome do artista',
                                     height: 44,
-                                    contentPadding: EdgeInsets.only(
-                                        left: 14, top: 18, bottom: 8),
+                                    contentPadding: EdgeInsets.only(left: 14),
                                   ),
                                 ],
                               ),
