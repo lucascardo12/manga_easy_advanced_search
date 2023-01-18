@@ -10,7 +10,7 @@ class FieldTextSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 6),
       child: CoffeeSearchField(
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 6),

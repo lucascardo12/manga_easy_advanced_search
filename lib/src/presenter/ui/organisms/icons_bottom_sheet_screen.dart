@@ -78,7 +78,7 @@ class IconBottomSheetScreen extends StatelessWidget {
                                   const SizedBox(height: 10),
                                   CoffeeButton(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 13.5),
+                                          vertical: 12),
                                       label: 'Selecionar',
                                       elevation: 6,
                                       onPress: () => showDialog(
