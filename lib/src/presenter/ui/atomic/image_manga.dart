@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 
 class ImageManga extends StatelessWidget {
@@ -6,16 +7,10 @@ class ImageManga extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return CoffeeMangaCover(
       height: 200,
       width: 125,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: NetworkImage(
-                imageManga),
-            fit: BoxFit.cover),
-        borderRadius: BorderRadius.circular(10),
-      ),
+      cover: imageManga,
     );
   }
 }
