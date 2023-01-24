@@ -7,13 +7,11 @@ class ApplyBottonn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Align(
-        alignment: FractionalOffset.bottomCenter,
-        child: CoffeeButton(
-          label: nameBotton,
-          onPress: () => Navigator.of(context).pop(),
-        ),
+    return Align(
+      alignment: FractionalOffset.bottomCenter,
+      child: CoffeeButton(
+        label: nameBotton,
+        onPress: () => Navigator.of(context).pop(),
       ),
     );
   }
