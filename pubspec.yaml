@@ -22,7 +22,7 @@ dependencies:
   coffee_cup:
     git:
       url: https://github.com/lucascardo12/manga_easy_coffee_cup.git
-      ref: 1.1.1
+      ref: 1.1.2
 
 dev_dependencies:
   flutter_test:
