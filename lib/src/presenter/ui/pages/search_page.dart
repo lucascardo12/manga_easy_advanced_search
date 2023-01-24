@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:coffee_cup/features/buttons/coffee_switch_button.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/domain/usecases/popular_genders_use_case.dart';
@@ -25,6 +26,7 @@ class _SearchPageState extends State<SearchPage> {
       backgroundColor: ThemeService.of.backgroundColor,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FieldTextSearch(ct: ct),
             CoffeeSwitchButton(
@@ -37,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
             selectButton
                 ? const MangaInfoSearch()
                 : const Expanded(child: MangaInfoSearchGreadView()),
+            CoffeeField(),
           ],
         ),
       ),

@@ -6,11 +6,18 @@ class MangaInfoSearchGreadView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, mainAxisExtent: 229),
-      itemBuilder: (_, index) => MangaContainerGridView(),
-      itemCount: 20,
+    var ratie = (MediaQuery.of(context).size.width / 800);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: ratie,
+            crossAxisCount: 3,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 7),
+        itemBuilder: (_, index) => const MangaContainerGridView(),
+        itemCount: 20,
+      ),
     );
   }
 }
