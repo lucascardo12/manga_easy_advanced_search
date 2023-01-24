@@ -17,25 +17,28 @@ class IconBottomSheetScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet<void>(
               context: context,
+              isScrollControlled: true,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
               ),
               builder: (BuildContext context) {
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Center(
-                          child: CoffeeText(
-                              text: 'Filtrar',
-                              typography: CoffeeTypography.title),
-                        ),
-                        Row(
+                return Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                      left: 16,
+                      right: 16,
+                      top: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const CoffeeText(
+                          text: 'Filtrar', typography: CoffeeTypography.title),
+                      SizedBox(
+                        height: 50,
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
                             CoffeeText(
@@ -44,7 +47,10 @@ class IconBottomSheetScreen extends StatelessWidget {
                             SeeMoreTextButton(),
                           ],
                         ),
-                        SingleChildScrollView(
+                      ),
+                      SizedBox(
+                        height: 50,
+                        child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: ct
@@ -56,19 +62,26 @@ class IconBottomSheetScreen extends StatelessWidget {
                                 .toList(),
                           ),
                         ),
-                        const SizedBox(height: 15),
-                        const CoffeeText(
-                          text: 'Avaliação',
-                        ),
-                        const SizedBox(height: 10),
-                        CoffeeRating(
+                      ),
+                      const SizedBox(height: 15),
+                      const CoffeeText(
+                        text: 'Avaliação',
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 50,
+                        child: CoffeeRating(
                           onRatingUpdate: (_) {},
                         ),
-                        const SizedBox(height: 15),
-                        Row(
+                      ),
+                      const SizedBox(height: 15),
+                      SizedBox(
+                        height: 85,
+                        child: Row(
                           children: [
                             Expanded(
                               child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -93,6 +106,7 @@ class IconBottomSheetScreen extends StatelessWidget {
                             const SizedBox(width: 40),
                             Expanded(
                               child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: const [
@@ -112,11 +126,13 @@ class IconBottomSheetScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                        const ApplyBottonn(
-                          nameBotton: 'Aplicar filtro',
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 10),
+                      const ApplyBottonn(
+                        nameBotton: 'Aplicar filtro',
+                      ),
+                      const SizedBox(height: 10),
+                    ],
                   ),
                 );
               });
