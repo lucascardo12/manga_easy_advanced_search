@@ -1,23 +1,24 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_advanced_search/src/data/models/manga_model.dart';
 
 class MangaContainerGridView extends StatelessWidget {
-  const MangaContainerGridView({super.key});
+  final Mangas data;
+  const MangaContainerGridView({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       mainAxisSize: MainAxisSize.min,
-      children: const [
+      children: [
         CoffeeMangaCover(
-          cover:
-              'https://th.bing.com/th/id/OIP.8RVFFbW8QsrVJ86NieQLngHaLj?pid=ImgDet&rs=1',
+          cover: data.thumb,
           height: 200,
-          width: 130,
+          width: 125,
         ),
         CoffeeText(
-          text: 'One Piece ',
+          text: data.name,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         )
