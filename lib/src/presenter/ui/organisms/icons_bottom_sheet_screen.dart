@@ -36,31 +36,25 @@ class IconBottomSheetScreen extends StatelessWidget {
                     children: [
                       const CoffeeText(
                           text: 'Filtrar', typography: CoffeeTypography.title),
-                      SizedBox(
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            CoffeeText(
-                              text: 'Gêneros',
-                            ),
-                            SeeMoreTextButton(),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: ct
-                                .getPopularGenderCase()
-                                .map(
-                                  (e) => CategorySelectSheetBotton(
-                                      nameCategory: e),
-                                )
-                                .toList(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          CoffeeText(
+                            text: 'Gêneros',
                           ),
+                          SeeMoreTextButton(),
+                        ],
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: ct
+                              .getPopularGenderCase()
+                              .map(
+                                (e) =>
+                                    CategorySelectSheetBotton(nameCategory: e),
+                              )
+                              .toList(),
                         ),
                       ),
                       const SizedBox(height: 15),
@@ -68,64 +62,58 @@ class IconBottomSheetScreen extends StatelessWidget {
                         text: 'Avaliação',
                       ),
                       const SizedBox(height: 10),
-                      SizedBox(
-                        height: 50,
-                        child: CoffeeRating(
-                          onRatingUpdate: (_) {},
-                        ),
+                      CoffeeRating(
+                        onRatingUpdate: (_) {},
                       ),
                       const SizedBox(height: 15),
-                      SizedBox(
-                        height: 85,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const CoffeeText(
-                                      text: 'Data',
-                                      typography: CoffeeTypography.body),
-                                  const SizedBox(height: 10),
-                                  CoffeeButton(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12),
-                                      label: 'Selecionar',
-                                      elevation: 6,
-                                      onPress: () => showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialogSelectYear();
-                                            },
-                                          ))
-                                ],
-                              ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const CoffeeText(
+                                    text: 'Data',
+                                    typography: CoffeeTypography.body),
+                                const SizedBox(height: 10),
+                                CoffeeButton(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    label: 'Selecionar',
+                                    elevation: 6,
+                                    onPress: () => showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialogSelectYear();
+                                          },
+                                        ))
+                              ],
                             ),
-                            const SizedBox(width: 40),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  CoffeeText(
-                                    text: 'Artista',
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  CoffeeField(
-                                    hintText: 'Nome do artista',
-                                    height: 44,
-                                    contentPadding: EdgeInsets.only(left: 14),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 40),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                CoffeeText(
+                                  text: 'Artista',
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CoffeeField(
+                                  hintText: 'Nome do artista',
+                                  height: 44,
+                                  contentPadding: EdgeInsets.only(left: 14),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(height: 10),
                       const ApplyBottonn(
