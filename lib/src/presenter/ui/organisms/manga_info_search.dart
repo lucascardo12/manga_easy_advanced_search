@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manga_easy_advanced_search/src/data/models/manga_model.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/atomic/description_manga.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/atomic/name_and_author_manga.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/atomic/genre_manga.dart';
@@ -6,7 +7,8 @@ import 'package:manga_easy_advanced_search/src/presenter/ui/atomic/image_manga.d
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaInfoSearch extends StatelessWidget {
-  const MangaInfoSearch({super.key});
+  final Mangas data;
+  const MangaInfoSearch({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,7 @@ class MangaInfoSearch extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(width: 20),
-          const ImageManga(
-              imageManga:
-                  'https://th.bing.com/th/id/OIP.8RVFFbW8QsrVJ86NieQLngHaLj?pid=ImgDet&rs=1'),
+          ImageManga(imageManga: data.thumb),
           const SizedBox(width: 15),
           Expanded(
             child: Column(
@@ -26,8 +26,8 @@ class MangaInfoSearch extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
-                const NameAndAuthorManga(
-                    nameManga: 'One piece', nameAuthor: 'Echiiro Oda'),
+                NameAndAuthorManga(
+                    nameManga: data.name, nameAuthor: data.autor),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -37,9 +37,8 @@ class MangaInfoSearch extends StatelessWidget {
                           )
                           .toList()),
                 ),
-                const DescriptionManga(
-                  description:
-                      'A floating action button (FAB) is a circular button that triggers the primary action in your apps UI. This page shows you how to add the FAB to your layout, customize some of its appearance, and respond to button taps.To learn more about how to design a floating action button into your app according to the Material Design Guidelines, also see Buttons: Floating Action Button.',
+                DescriptionManga(
+                  description: data.sinopse,
                 )
               ],
             ),
