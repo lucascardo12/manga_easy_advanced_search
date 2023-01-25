@@ -49,13 +49,18 @@ class _SearchPageState extends State<SearchPage> {
             ),
             //
             SliverToBoxAdapter(
-              child: CoffeeSwitchButton(
-                value: selectButton,
-                onChanged: (_) {
-                  setState(() {
-                    selectButton = !selectButton;
-                  });
-                },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CoffeeSwitchButton(
+                    value: selectButton,
+                    onChanged: (_) {
+                      setState(() {
+                        selectButton = !selectButton;
+                      });
+                    },
+                  ),
+                ],
               ),
             ),
             SliverToBoxAdapter(
