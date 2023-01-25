@@ -31,7 +31,7 @@ class MangaInfoSearch extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                      children: GenerosModel.carregaGeneros()
+                      children: GenerosModel.carregaGeneros(codigo: data.generos)
                           .map(
                             (e) => GenreManga(gender: e),
                           )
