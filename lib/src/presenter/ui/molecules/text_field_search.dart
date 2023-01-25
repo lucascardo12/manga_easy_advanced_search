@@ -4,13 +4,13 @@ import 'package:manga_easy_advanced_search/src/presenter/controllers/search_cont
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/icons_bottom_sheet_screen.dart';
 
 class FieldTextSearch extends StatelessWidget {
-  final SearchController ct;
+  final GenderController ct;
   const FieldTextSearch({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 6),
+      padding: const EdgeInsets.only(),
       child: CoffeeSearchField(
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 6),

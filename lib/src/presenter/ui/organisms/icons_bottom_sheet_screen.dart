@@ -7,7 +7,7 @@ import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_s
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/alert_dialog_select_year.dart';
 
 class IconBottomSheetScreen extends StatelessWidget {
-  final SearchController ct;
+  final GenderController ct;
   const IconBottomSheetScreen({super.key, required this.ct});
 
   @override
