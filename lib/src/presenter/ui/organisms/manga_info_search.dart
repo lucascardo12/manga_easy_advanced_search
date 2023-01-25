@@ -22,7 +22,6 @@ class MangaInfoSearch extends StatelessWidget {
           const SizedBox(width: 15),
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
@@ -31,11 +30,12 @@ class MangaInfoSearch extends StatelessWidget {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                      children: GenerosModel.carregaGeneros(codigo: data.generos)
-                          .map(
-                            (e) => GenreManga(gender: e),
-                          )
-                          .toList()),
+                      children:
+                          GenerosModel.carregaGeneros(codigo: data.generos)
+                              .map(
+                                (e) => GenreManga(gender: e),
+                              )
+                              .toList()),
                 ),
                 DescriptionManga(
                   description: data.sinopse,
