@@ -12,7 +12,7 @@ class DescriptionManga extends StatelessWidget {
       child: CoffeeText(
           text: description,
           typography: CoffeeTypography.body,
-          maxLines: 8,
+          maxLines: 7,
           overflow: TextOverflow.ellipsis),
     );
   }

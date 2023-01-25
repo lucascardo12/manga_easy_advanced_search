@@ -16,7 +16,7 @@ class NameAndAuthorManga extends StatelessWidget {
         CoffeeText(
             text: nameManga,
             typography: CoffeeTypography.title,
-            maxLines: 1,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis),
         CoffeeText(
             text: nameAuthor,
