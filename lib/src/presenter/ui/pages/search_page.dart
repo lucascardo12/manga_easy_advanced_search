@@ -21,16 +21,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  bool selectButton = false;
   final ct = GenderController(GetPopularGenderCase());
   final MangaController _controller =
       MangaController(MangaRepositoryImp(DioService()));
+
   @override
   void initState() {
     _controller.fetch();
     super.initState();
   }
 
-  bool selectButton = true;
   @override
   Widget build(BuildContext context) {
     var ratie = (MediaQuery.of(context).size.width / 800);
@@ -42,7 +43,7 @@ class _SearchPageState extends State<SearchPage> {
             SliverAppBar(
               snap: false,
               pinned: false,
-              floating: false,
+              floating: true,
               title: FieldTextSearch(ct: ct),
               shadowColor: Colors.transparent,
               backgroundColor: Colors.transparent,
@@ -69,14 +70,7 @@ class _SearchPageState extends State<SearchPage> {
               builder: (_, manga, __) {
                 return manga != null
                     ? selectButton
-                        ? ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: manga.length,
-                            itemBuilder: (_, idx) =>
-                                MangaInfoSearch(data: manga[idx]),
-                          )
-                        : Padding(
+                        ? Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
@@ -91,6 +85,13 @@ class _SearchPageState extends State<SearchPage> {
                                   MangaContainerGridView(data: manga[idx]),
                               itemCount: manga.length,
                             ))
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: manga.length,
+                            itemBuilder: (_, idx) =>
+                                MangaInfoSearch(data: manga[idx]),
+                          )
                     : Container();
               },
             ))
