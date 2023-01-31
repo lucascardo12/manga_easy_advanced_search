@@ -6,9 +6,9 @@ import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_bott
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/alert_dialog_select_year.dart';
 
-class IconBottomSheetScreen extends StatelessWidget {
+class FilterSearchSelectButton extends StatelessWidget {
   final GenderController ct;
-  const IconBottomSheetScreen({super.key, required this.ct});
+  const FilterSearchSelectButton({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
