@@ -10,17 +10,21 @@ class MangaContainerGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      mainAxisSize: MainAxisSize.min,
       children: [
         CoffeeMangaCover(
           cover: data.thumb,
           height: 200,
           width: 125,
         ),
-        CoffeeText(
-          text: data.name,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+        SizedBox(
+          height: 30,
+          child: Center(
+            child: CoffeeText(
+              text: data.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         )
       ],
     );
