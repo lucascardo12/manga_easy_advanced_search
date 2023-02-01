@@ -8,23 +8,20 @@ class GenreManga extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 35,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 20,
-            width: 20,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                image: DecorationImage(image: NetworkImage(gender.imagem))),
-          ),
-          const SizedBox(width: 5),
-          CoffeeText(text: gender.titulo, typography: CoffeeTypography.body),
-          const SizedBox(width: 5),
-        ],
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 20,
+          width: 20,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              image: DecorationImage(image: NetworkImage(gender.imagem))),
+        ),
+        const SizedBox(width: 5),
+        CoffeeText(text: gender.titulo, typography: CoffeeTypography.body),
+        const SizedBox(width: 5),
+      ],
     );
   }
 }
