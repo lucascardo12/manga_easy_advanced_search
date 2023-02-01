@@ -17,11 +17,13 @@ class NameAndAuthorManga extends StatelessWidget {
             typography: CoffeeTypography.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis),
-        CoffeeText(
-            text: nameAuthor,
-            typography: CoffeeTypography.body,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis),
+        nameAuthor.isEmpty
+            ? const SizedBox()
+            : CoffeeText(
+                text: nameAuthor,
+                typography: CoffeeTypography.body,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis),
       ],
     );
   }
