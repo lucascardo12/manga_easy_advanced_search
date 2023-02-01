@@ -1,9 +1,9 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/data/models/manga_model.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaContainerGridView extends StatelessWidget {
-  final Mangas data;
+  final InfoComicModel data;
   const MangaContainerGridView({super.key, required this.data});
 
   @override

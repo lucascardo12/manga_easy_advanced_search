@@ -10,6 +10,7 @@ import 'package:manga_easy_advanced_search/src/presenter/controllers/search_cont
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/manga_container_grid_view.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/manga_info_search.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/text_field_search.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class SearchPage extends StatefulWidget {
@@ -65,7 +66,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             SliverToBoxAdapter(
-                child: ValueListenableBuilder<List<Mangas>?>(
+                child: ValueListenableBuilder<List<InfoComicModel>?>(
               valueListenable: _controller.mangas,
               builder: (_, manga, __) {
                 return manga != null
@@ -90,7 +91,7 @@ class _SearchPageState extends State<SearchPage> {
                             shrinkWrap: true,
                             itemCount: manga.length,
                             itemBuilder: (_, idx) =>
-                                MangaInfoSearch(data: manga[idx]),
+                                MangaInfoSearch(manga: manga[idx]),
                           )
                     : Container();
               },

@@ -7,18 +7,20 @@ import 'package:manga_easy_advanced_search/src/presenter/ui/atomic/image_manga.d
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaInfoSearch extends StatelessWidget {
-  final Mangas data;
-  const MangaInfoSearch({super.key, required this.data});
+  final InfoComicModel manga;
+
+  const MangaInfoSearch({super.key, required this.manga});
 
   @override
   Widget build(BuildContext context) {
+    final generos = manga.generos.split('<>').toList();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(width: 20),
-          ImageManga(imageManga: data.thumb),
+          ImageManga(imageManga: manga.thumb),
           const SizedBox(width: 15),
           Expanded(
             child: Column(
@@ -26,19 +28,30 @@ class MangaInfoSearch extends StatelessWidget {
               children: [
                 const SizedBox(height: 5),
                 NameAndAuthorManga(
-                    nameManga: data.name, nameAuthor: data.autor),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                      children:
-                          GenerosModel.carregaGeneros(codigo: data.generos)
-                              .map(
-                                (e) => GenreManga(gender: e),
-                              )
-                              .toList()),
+                    nameManga: manga.name, nameAuthor: manga.autor),
+                SizedBox(
+                  height: 35,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: generos.length,
+                    itemBuilder: (context, index) {
+                      final indexGender = generos[index];
+                      final genero =
+                          GenerosModel.carregaGeneros(codigo: indexGender);
+                      return genero.isNotEmpty
+                          ? GenreManga(gender: genero.first)
+                          : SizedBox(
+                              height: 20,
+                              child: Center(
+                                child: Text(indexGender),
+                              ),
+                            );
+                    },
+                  ),
                 ),
                 DescriptionManga(
-                  description: data.sinopse,
+                  description: manga.sinopse,
                 )
               ],
             ),
