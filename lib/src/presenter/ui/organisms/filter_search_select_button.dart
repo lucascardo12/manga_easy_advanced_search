@@ -1,10 +1,12 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/presenter/controllers/search_controller.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/select_ranged.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/see_more_text_button.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/alert_dialog_select_year.dart';
+import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class FilterSearchSelectButton extends StatelessWidget {
   final GenderController ct;
@@ -12,8 +14,11 @@ class FilterSearchSelectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-        icon: const Icon(Icons.menu_rounded),
+    return FloatingActionButton(
+     
+        backgroundColor: ThemeService.of.primaryColor,
+        child:
+            Icon(Icons.filter_alt_outlined, color: ThemeService.of.primaryText),
         onPressed: () {
           showModalBottomSheet<void>(
               context: context,
@@ -69,48 +74,45 @@ class FilterSearchSelectButton extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const CoffeeText(
-                                    text: 'Data',
-                                    typography: CoffeeTypography.body),
-                                const SizedBox(height: 10),
-                                CoffeeButton(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 12),
-                                    label: 'Selecionar',
-                                    elevation: 6,
-                                    onPress: () => showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialogSelectYear();
-                                          },
-                                        ))
-                              ],
+                            child: SizedBox(
+                              height: 68,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  CoffeeText(
+                                      text: 'Data',
+                                      typography: CoffeeTypography.body),
+                                  SizedBox(height: 10),
+                                  SelectRanged()
+                                ],
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 40),
+                          const SizedBox(width: 20),
                           Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                CoffeeText(
-                                  text: 'Artista',
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CoffeeField(
-                                  hintText: 'Nome do artista',
-                                  height: 44,
-                                  contentPadding: EdgeInsets.only(left: 14),
-                                ),
-                              ],
+                            child: SizedBox(
+                              height: 68,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: const [
+                                  CoffeeText(
+                                    text: 'Artista',
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  CoffeeField(
+                                    hintText: 'Nome do artista',
+                                    height: 44,
+                                    contentPadding: EdgeInsets.only(left: 14),
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         ],
