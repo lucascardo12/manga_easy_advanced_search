@@ -11,6 +11,7 @@ class MangaContainerGridView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        const SizedBox(height: 5),
         CoffeeMangaCover(
           cover: data.thumb,
           height: 200,

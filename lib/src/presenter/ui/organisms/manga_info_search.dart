@@ -1,3 +1,4 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/data/models/manga_model.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/atomic/description_manga.dart';
@@ -30,7 +31,7 @@ class MangaInfoSearch extends StatelessWidget {
                 NameAndAuthorManga(
                     nameManga: manga.name, nameAuthor: manga.autor),
                 SizedBox(
-                  height: 35,
+                  height: 30,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -44,7 +45,7 @@ class MangaInfoSearch extends StatelessWidget {
                           : SizedBox(
                               height: 20,
                               child: Center(
-                                child: Text(indexGender),
+                                child: CoffeeText(text: indexGender),
                               ),
                             );
                     },
