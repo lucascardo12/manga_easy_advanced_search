@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class SelectRanged extends StatefulWidget {
   const SelectRanged({super.key});
@@ -10,17 +8,26 @@ class SelectRanged extends StatefulWidget {
 }
 
 class _SelectRangedState extends State<SelectRanged> {
-  RangeValues _currentRangeValues = RangeValues(1970, 2023);
+  final double yearStart = 1985;
+
+  late RangeValues _currentRangeValues;
+  @override
+  void initState() {
+    _currentRangeValues =
+        RangeValues(yearStart, DateTime.now().year.toDouble());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35,
-      width: 400,
+      width: 450,
       child: RangeSlider(
         values: _currentRangeValues,
-        min: 1970,
+        min: yearStart,
         max: 2023,
-        divisions: 53,
+        divisions: DateTime.now().year - yearStart.toInt(),
         labels: RangeLabels(
           _currentRangeValues.start.round().toString(),
           _currentRangeValues.end.round().toString(),
