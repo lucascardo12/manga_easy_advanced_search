@@ -5,7 +5,6 @@ import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/select_ran
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/see_more_text_button.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/alert_dialog_select_year.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class FilterSearchSelectButton extends StatelessWidget {
@@ -14,13 +13,14 @@ class FilterSearchSelectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-     
-        backgroundColor: ThemeService.of.primaryColor,
-        child:
-            Icon(Icons.filter_alt_outlined, color: ThemeService.of.primaryText),
-        onPressed: () {
-          showModalBottomSheet<void>(
+    return SizedBox(
+      child: FittedBox(
+        child: FloatingActionButton(
+          backgroundColor: ThemeService.of.primaryColor,
+          child: Icon(Icons.filter_alt_outlined,
+              color: ThemeService.of.primaryText),
+          onPressed: () {
+            showModalBottomSheet<void>(
               context: context,
               isScrollControlled: true,
               shape: const RoundedRectangleBorder(
@@ -125,7 +125,11 @@ class FilterSearchSelectButton extends StatelessWidget {
                     ],
                   ),
                 );
-              });
-        });
+              },
+            );
+          },
+        ),
+      ),
+    );
   }
 }

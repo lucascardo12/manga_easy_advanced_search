@@ -8,6 +8,7 @@ import 'package:manga_easy_advanced_search/src/domain/usecases/popular_genders_u
 import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
 import 'package:manga_easy_advanced_search/src/presenter/controllers/search_controller.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/manga_container_grid_view.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/filter_search_select_button.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/manga_info_search.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/text_field_search.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
@@ -38,6 +39,30 @@ class _SearchPageState extends State<SearchPage> {
     var ratie = (MediaQuery.of(context).size.width / 800);
     return Scaffold(
       backgroundColor: ThemeService.of.backgroundColor,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Container(
+            height: 45,
+            margin: const EdgeInsets.only(bottom: 4, right: 5),
+            child: FittedBox(
+              child: FloatingActionButton(
+                  onPressed: () {
+                    setState(() {
+                      selectButton = !selectButton;
+                    });
+                  },
+                  backgroundColor: ThemeService.of.primaryColor,
+                  child: selectButton
+                      ? Icon(Icons.apps, color: ThemeService.of.primaryText)
+                      : Icon(Icons.view_stream,
+                          color: ThemeService.of.primaryText)),
+            ),
+          ),
+          FilterSearchSelectButton(ct: ct),
+        ],
+      ),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -48,22 +73,6 @@ class _SearchPageState extends State<SearchPage> {
               title: FieldTextSearch(ct: ct),
               shadowColor: Colors.transparent,
               backgroundColor: Colors.transparent,
-            ),
-            //
-            SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CoffeeSwitchButton(
-                    value: selectButton,
-                    onChanged: (_) {
-                      setState(() {
-                        selectButton = !selectButton;
-                      });
-                    },
-                  ),
-                ],
-              ),
             ),
             SliverToBoxAdapter(
                 child: ValueListenableBuilder<List<InfoComicModel>?>(
@@ -80,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       childAspectRatio: ratie,
                                       crossAxisCount: 3,
-                                      mainAxisSpacing: 5,
+                                      mainAxisSpacing: 6,
                                       crossAxisSpacing: 7),
                               itemBuilder: (_, idx) =>
                                   MangaContainerGridView(data: manga[idx]),
