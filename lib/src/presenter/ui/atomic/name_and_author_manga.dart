@@ -1,5 +1,6 @@
 import 'package:coffee_cup/features/text/coffee_text.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class NameAndAuthorManga extends StatelessWidget {
   final String nameManga;
@@ -19,11 +20,21 @@ class NameAndAuthorManga extends StatelessWidget {
             overflow: TextOverflow.ellipsis),
         nameAuthor.isEmpty
             ? const SizedBox()
-            : CoffeeText(
-                text: nameAuthor,
-                typography: CoffeeTypography.body,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis),
+            : Row(
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: ThemeService.of.primaryText,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 5),
+                  CoffeeText(
+                      text: nameAuthor,
+                      typography: CoffeeTypography.body,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis),
+                ],
+              ),
       ],
     );
   }
