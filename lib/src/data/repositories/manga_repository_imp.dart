@@ -1,18 +1,24 @@
-import 'package:manga_easy_advanced_search/src/data/models/manga_model.dart';
-import 'package:manga_easy_advanced_search/src/data/repositories/manga_repository.dart';
-import 'package:manga_easy_advanced_search/src/data/service/client_service.dart';
-import 'package:manga_easy_advanced_search/src/data/utils/api.utils.dart';
+import 'package:manga_easy_advanced_search/src/data/datasources/manga_datasource.dart';
+import 'package:manga_easy_advanced_search/src/data/dtos/manga_dto.dart';
+import 'package:manga_easy_advanced_search/src/domain/entities/manga_filter_entity.dart';
+import 'package:manga_easy_advanced_search/src/domain/repositories/manga_repository.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaRepositoryImp implements MangaRepository {
-  final ClientService _clientService;
-  MangaRepositoryImp(this._clientService);
+  final MangaDatasource _mangaDatasource;
+  MangaRepositoryImp(this._mangaDatasource);
 
   @override
-  Future<List<InfoComicModel>> getManga() async {
-    await Future.delayed(const Duration(seconds: 3));
-    var result = await _clientService.get(API.mangaList);
-    var apireseult = ResultModel.fromJson(result.data);
-    return apireseult.data.map((e) => InfoComicModel.fromJson(e)).toList();
+  Future<List<InfoComicModel>> getManga({
+    required MangaFilterEntity filter,
+    int limit = 100,
+    int offset = 0,
+  }) async {
+    var result = await _mangaDatasource.list(
+      filter: filter,
+      limit: limit,
+      offset: offset,
+    );
+    return result.data.map((e) => InfoComicModel.fromJson(e)).toList();
   }
 }
