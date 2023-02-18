@@ -29,7 +29,7 @@ class _CategorySelectSheetBottonState extends State<CategorySelectSheetBotton> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: ThemeService.of.primaryText,
+                  color: ThemeService.of.backgroundIcon,
                 ),
               ),
               child: CoffeeText(
@@ -42,16 +42,19 @@ class _CategorySelectSheetBottonState extends State<CategorySelectSheetBotton> {
                 color: ThemeService.of.primaryColor,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: ThemeService.of.backgroundText,
+                  color: ThemeService.of.backgroundIcon,
                 ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(widget.nameCategory.titulo),
-                  const Icon(
+                  CoffeeText(
+                      text: widget.nameCategory.titulo,
+                      color: ThemeService.of.primaryText),
+                  Icon(
                     Icons.check_rounded,
                     size: 14,
+                    color: ThemeService.of.primaryText,
                   ),
                 ],
               ),

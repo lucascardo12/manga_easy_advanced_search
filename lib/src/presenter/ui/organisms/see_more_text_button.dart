@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class SeeMoreTextButton extends StatelessWidget {
   const SeeMoreTextButton({super.key});
@@ -13,13 +14,14 @@ class SeeMoreTextButton extends StatelessWidget {
       onPressed: () {
         showModalBottomSheet<void>(
             context: context,
+            backgroundColor: ThemeService.of.backgroundColor,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
             ),
             builder: (BuildContext context) {
               return Container(
-                height: MediaQuery.of(context).size.height * 0.4,
+                height: MediaQuery.of(context).size.height * 0.5,
                 padding: const EdgeInsets.all(5),
                 child: Column(
                   children: [
@@ -49,6 +51,7 @@ class SeeMoreTextButton extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 6),
                     const ApplyBottonn(nameBotton: 'Aplicar')
                   ],
                 ),

@@ -24,7 +24,7 @@ class NameAndAuthorManga extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.person,
-                    color: ThemeService.of.primaryText,
+                    color: ThemeService.of.backgroundText,
                     size: 18,
                   ),
                   const SizedBox(width: 5),
