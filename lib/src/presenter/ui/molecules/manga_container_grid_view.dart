@@ -13,6 +13,7 @@ class MangaContainerGridView extends StatelessWidget {
       children: [
         const SizedBox(height: 5),
         CoffeeMangaCover(
+          filtraImg: true,
           cover: data.thumb,
           height: 200,
           width: 125,

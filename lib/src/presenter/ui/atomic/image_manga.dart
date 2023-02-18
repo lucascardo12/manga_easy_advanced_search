@@ -8,6 +8,7 @@ class ImageManga extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CoffeeMangaCover(
+      filtraImg: true,
       height: 200,
       width: 125,
       cover: imageManga,
