@@ -1,14 +1,13 @@
-import 'package:coffee_cup/coffe_cup.dart';
-import 'package:coffee_cup/features/buttons/coffee_switch_button.dart';
+import 'dart:math';
+
+import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/data/models/manga_model.dart';
 import 'package:manga_easy_advanced_search/src/data/repositories/manga_repository_imp.dart';
 import 'package:manga_easy_advanced_search/src/data/service/dio_service.dart';
 import 'package:manga_easy_advanced_search/src/domain/usecases/popular_genders_use_case.dart';
 import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
 import 'package:manga_easy_advanced_search/src/presenter/controllers/search_controller.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/manga_container_grid_view.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/filter_search_select_button.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/manga_info_search.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/text_field_search.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
@@ -39,29 +38,16 @@ class _SearchPageState extends State<SearchPage> {
     var ratie = (MediaQuery.of(context).size.width / 800);
     return Scaffold(
       backgroundColor: ThemeService.of.backgroundColor,
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            height: 45,
-            margin: const EdgeInsets.only(bottom: 4, right: 5),
-            child: FittedBox(
-              child: FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                      selectButton = !selectButton;
-                    });
-                  },
-                  backgroundColor: ThemeService.of.primaryColor,
-                  child: selectButton
-                      ? Icon(Icons.apps, color: ThemeService.of.primaryText)
-                      : Icon(Icons.view_stream,
-                          color: ThemeService.of.primaryText)),
-            ),
-          ),
-          FilterSearchSelectButton(ct: ct),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            selectButton = !selectButton;
+          });
+        },
+        backgroundColor: ThemeService.of.primaryColor,
+        child: selectButton
+            ? Icon(Icons.view_stream, color: ThemeService.of.primaryText)
+            : Icon(Icons.apps, color: ThemeService.of.primaryText),
       ),
       body: SafeArea(
         child: CustomScrollView(
@@ -70,7 +56,7 @@ class _SearchPageState extends State<SearchPage> {
               snap: false,
               pinned: false,
               floating: true,
-              title: FieldTextSearch(ct: ct),
+              title: TextFieldSearch(ct: ct),
               shadowColor: Colors.transparent,
               backgroundColor: Colors.transparent,
             ),
