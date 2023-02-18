@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:manga_easy_advanced_search/src/data/service/client_service.dart';
+import 'package:manga_easy_advanced_search/share/service/client_service.dart';
 
 class DioService extends ClientService {
   final dio = Dio(
