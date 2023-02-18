@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/presenter/controllers/search_controller.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/filter_search_select_button.dart';
 
-class FieldTextSearch extends StatelessWidget {
+class TextFieldSearch extends StatelessWidget {
   final GenderController ct;
-  const FieldTextSearch({super.key, required this.ct});
+  const TextFieldSearch({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(),
-      child: CoffeeSearchField(),
-    );
+    return Padding(
+        padding: const EdgeInsets.only(),
+        child: CoffeeSearchField(
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(right: 6),
+            child: FilterSearchSelectButton(ct: ct),
+          ),
+        ));
   }
 }

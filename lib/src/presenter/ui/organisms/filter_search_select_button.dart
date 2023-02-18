@@ -13,123 +13,119 @@ class FilterSearchSelectButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: FittedBox(
-        child: FloatingActionButton(
-          backgroundColor: ThemeService.of.primaryColor,
-          child: Icon(Icons.filter_alt_outlined,
-              color: ThemeService.of.primaryText),
-          onPressed: () {
-            showModalBottomSheet<void>(
-              context: context,
-              isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
-              ),
-              builder: (BuildContext context) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom,
-                      left: 16,
-                      right: 16,
-                      top: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const CoffeeText(
-                          text: 'Filtrar', typography: CoffeeTypography.title),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          CoffeeText(
-                            text: 'Gêneros',
-                          ),
-                          SeeMoreTextButton(),
-                        ],
+    return IconButton(
+      icon: const Icon(
+        Icons.menu,
+        size: 30,
+      ),
+      color: ThemeService.of.backgroundIcon,
+      onPressed: () {
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: ThemeService.of.backgroundColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          ),
+          builder: (BuildContext context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                  left: 16,
+                  right: 16,
+                  top: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const CoffeeText(
+                      text: 'Filtrar', typography: CoffeeTypography.title),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      CoffeeText(
+                        text: 'Gêneros',
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: ct
-                              .getPopularGenderCase()
-                              .map(
-                                (e) =>
-                                    CategorySelectSheetBotton(nameCategory: e),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      const CoffeeText(
-                        text: 'Avaliação',
-                      ),
-                      const SizedBox(height: 10),
-                      CoffeeRating(
-                        onRatingUpdate: (_) {},
-                      ),
-                      const SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: SizedBox(
-                              height: 68,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  CoffeeText(
-                                      text: 'Data',
-                                      typography: CoffeeTypography.body),
-                                  SizedBox(height: 10),
-                                  SelectRanged()
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          Expanded(
-                            child: SizedBox(
-                              height: 68,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  CoffeeText(
-                                    text: 'Artista',
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  CoffeeField(
-                                    hintText: 'Nome do artista',
-                                    height: 44,
-                                    contentPadding: EdgeInsets.only(left: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      const ApplyBottonn(
-                        nameBotton: 'Aplicar filtro',
-                      ),
-                      const SizedBox(height: 10),
+                      SeeMoreTextButton(),
                     ],
                   ),
-                );
-              },
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: ct
+                          .getPopularGenderCase()
+                          .map(
+                            (e) => CategorySelectSheetBotton(nameCategory: e),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  const CoffeeText(
+                    text: 'Avaliação',
+                  ),
+                  const SizedBox(height: 10),
+                  CoffeeRating(
+                    onRatingUpdate: (_) {},
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(
+                          height: 68,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              CoffeeText(
+                                  text: 'Data',
+                                  typography: CoffeeTypography.body),
+                              SizedBox(height: 10),
+                              SelectRanged()
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: SizedBox(
+                          height: 68,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const [
+                              CoffeeText(
+                                text: 'Artista',
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              CoffeeField(
+                                hintText: 'Nome do artista',
+                                height: 44,
+                                contentPadding: EdgeInsets.only(left: 14),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  const ApplyBottonn(
+                    nameBotton: 'Aplicar filtro',
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
             );
           },
-        ),
-      ),
+        );
+      },
     );
   }
 }
