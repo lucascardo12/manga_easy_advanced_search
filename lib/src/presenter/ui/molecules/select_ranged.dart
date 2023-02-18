@@ -26,7 +26,7 @@ class _SelectRangedState extends State<SelectRanged> {
       child: RangeSlider(
         values: _currentRangeValues,
         min: yearStart,
-        max: 2023,
+        max: DateTime.now().year.toDouble(),
         divisions: DateTime.now().year - yearStart.toInt(),
         labels: RangeLabels(
           _currentRangeValues.start.round().toString(),
