@@ -11,10 +11,11 @@ class MangaDatasourceV1 extends MangaDatasource {
   @override
   Future<MangaDto> list({
     required MangaFilterEntity filter,
-    int offset = 0,
-    int limit = 100,
+    int? offset,
+    int? limit,
   }) async {
-    var result = await _clientService.get('/v1/${API.mangaList}');
+    var result = await _clientService
+        .get('/v1/${API.mangaList}?limit=$limit&offset=$offset');
     return MangaDto.fromJson(result.data);
   }
 }

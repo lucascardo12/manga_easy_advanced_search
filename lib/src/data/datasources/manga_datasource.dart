@@ -4,7 +4,7 @@ import 'package:manga_easy_advanced_search/src/domain/entities/manga_filter_enti
 abstract class MangaDatasource {
   Future<MangaDto> list({
     required MangaFilterEntity filter,
-    int offset = 0,
-    int limit = 100,
+    int? offset,
+    int? limit,
   });
 }
