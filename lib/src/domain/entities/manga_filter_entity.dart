@@ -1,16 +1,16 @@
 class MangaFilterEntity {
-  final String? search;
-  late final int? yearAt;
-  late final int? yearFrom;
-  final List<String>? genders;
-  final double? rating;
-  final String? author;
+  String? search;
+  int? yearAt;
+  int? yearFrom;
+  List<String> genders;
+  double? rating;
+  String? author;
 
   MangaFilterEntity({
     this.search,
     this.yearAt,
     this.yearFrom,
-    this.genders,
+    required this.genders,
     this.rating,
     this.author,
   });
