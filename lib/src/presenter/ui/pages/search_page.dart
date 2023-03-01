@@ -1,12 +1,6 @@
-import 'dart:math';
-
-import 'package:circular_menu/circular_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/data/repositories/manga_repository_imp.dart';
-import 'package:manga_easy_advanced_search/src/data/service/dio_service.dart';
-import 'package:manga_easy_advanced_search/src/domain/usecases/popular_genders_use_case.dart';
+import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/presenter/controllers/search_controller.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/manga_container_grid_view.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/manga_info_search.dart';
 import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/text_field_search.dart';
@@ -23,13 +17,11 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   bool selectButton = false;
-  final ct = GenderController(GetPopularGenderCase());
-  final MangaController _controller =
-      MangaController(MangaRepositoryImp(DioService()));
+  late final MangaController _controller;
 
   @override
   void initState() {
-    _controller.fetch();
+    _controller = GetIt.I.get<MangaController>();
     super.initState();
   }
 
@@ -56,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
               snap: false,
               pinned: false,
               floating: true,
-              title: TextFieldSearch(ct: ct),
+              title: TextFieldSearch(ct: _controller),
               shadowColor: Colors.transparent,
               backgroundColor: Colors.transparent,
             ),

@@ -12,12 +12,16 @@ class MangaRepositoryImp implements MangaRepository {
     required MangaFilterEntity filter,
     int? limit,
     int? offset,
-  })  async {
+  }) async {
     var result = await _mangaDatasource.list(
-      filter: filter,
-      limit: limit ?? 20,
-      offset: offset ?? 0
-    );
+        filter: filter, limit: limit ?? 20, offset: offset ?? 0);
     return result.data.map((e) => InfoComicModel.fromJson(e)).toList();
+  }
+
+  @override
+  Future<List<String>> getGenders(List<String> genders) async {
+   
+    
+    return genders;
   }
 }

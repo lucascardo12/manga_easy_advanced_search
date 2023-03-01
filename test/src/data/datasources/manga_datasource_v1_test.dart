@@ -6,7 +6,7 @@ import 'package:manga_easy_advanced_search/src/domain/entities/manga_filter_enti
 void main() {
   final data = MangaDatasourceV1(DioService());
   test('manga datasource v1 ...', () async {
-    var result = await data.list(filter: MangaFilterEntity());
+    var result = await data.list(filter: MangaFilterEntity(genders: []));
     print(result.toJson());
   });
 }

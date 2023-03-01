@@ -11,12 +11,16 @@ class MangaController {
     fetch();
   }
 
-  MangaFilterEntity mangaFilter = MangaFilterEntity();
+  MangaFilterEntity mangaFilter = MangaFilterEntity(genders: []);
 
   final ValueNotifier<List<InfoComicModel>?> mangas =
       ValueNotifier<List<InfoComicModel>?>(null);
 
+  ValueNotifier<MangaFilterEntity> filterNotifier =
+      ValueNotifier<MangaFilterEntity>(MangaFilterEntity(genders: []));
+
   fetch() async {
     mangas.value = await _mangaRepository.getManga(filter: mangaFilter);
+    filterNotifier.value = _mangaRepository.getGenders(filterNotifier.value.genders);
   }
 }

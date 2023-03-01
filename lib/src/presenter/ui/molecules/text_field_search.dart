@@ -1,21 +1,44 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/presenter/controllers/search_controller.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/filter_search_select_button.dart';
+import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
+import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/filter_botton_sheet.dart';
+import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class TextFieldSearch extends StatelessWidget {
-  final GenderController ct;
+  final MangaController ct;
   const TextFieldSearch({super.key, required this.ct});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(),
-        child: CoffeeSearchField(
-          suffixIcon: Padding(
-            padding: const EdgeInsets.only(right: 6),
-            child: FilterSearchSelectButton(ct: ct),
+      padding: const EdgeInsets.only(),
+      child: CoffeeSearchField(
+        onChanged: (_) => ct.mangaFilter.search,
+        suffixIcon: Padding(
+          padding: const EdgeInsets.only(right: 6),
+          child: IconButton(
+            icon: const Icon(
+              Icons.menu,
+              size: 30,
+            ),
+            color: ThemeService.of.backgroundIcon,
+            onPressed: () {
+              showModalBottomSheet<void>(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: ThemeService.of.backgroundColor,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                  ),
+                  builder: (BuildContext context) {
+                    return FilterBottonSheet(ct: ct);
+                  });
+            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

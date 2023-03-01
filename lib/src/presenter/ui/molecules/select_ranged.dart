@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
 
 class SelectRanged extends StatefulWidget {
-  const SelectRanged({super.key});
+  final MangaController ct;
+  const SelectRanged({super.key, required this.ct});
 
   @override
   State<SelectRanged> createState() => _SelectRangedState();
@@ -34,6 +36,8 @@ class _SelectRangedState extends State<SelectRanged> {
         ),
         onChanged: (RangeValues values) {
           setState(() {
+            widget.ct.mangaFilter.yearAt = values.end.toInt() ;
+            widget.ct.mangaFilter.yearFrom = values.start.toInt();
             _currentRangeValues = values;
           });
         },

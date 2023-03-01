@@ -7,7 +7,7 @@ import 'package:manga_easy_advanced_search/src/domain/entities/manga_filter_enti
 void main() {
   final reposity = MangaRepositoryImp(MangaDatasourceV1(DioService()));
   test('manga repository imp ...', () async {
-    var result = await reposity.getManga(filter: MangaFilterEntity());
+    var result = await reposity.getManga(filter: MangaFilterEntity(genders: []));
     for (var element in result) {
       print(element.toJson());
     }

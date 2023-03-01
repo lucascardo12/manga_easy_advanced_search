@@ -7,4 +7,5 @@ abstract class MangaRepository {
     int? limit,
     int? offset,
   });
+  Future<List<String>> getGenders(List<String> genders);
 }
