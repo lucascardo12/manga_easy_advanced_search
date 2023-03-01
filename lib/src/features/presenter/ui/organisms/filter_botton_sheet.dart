@@ -1,11 +1,10 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/select_ranged.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/see_more_text_button.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/apply_botton.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/category_select_sheet_botton.dart';
-import 'package:manga_easy_themes/manga_easy_themes.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_ranged.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/see_more_text_button.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/apply_botton.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_sheet_botton.dart';
 
 class FilterBottonSheet extends StatelessWidget {
   final MangaController ct;
@@ -35,14 +34,13 @@ class FilterBottonSheet extends StatelessWidget {
           ),
           ValueListenableBuilder(
             valueListenable: ct.mangas,
-
             builder: (context, value, child) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: ct
                     .getPopularGenderCase()
                     .map(
-                      (e) => CategorySelectSheetBotton(gender: e, ct: value.),
+                      (e) => CategorySelectSheetBotton(gender: e, ct: []),
                     )
                     .toList(),
               ),

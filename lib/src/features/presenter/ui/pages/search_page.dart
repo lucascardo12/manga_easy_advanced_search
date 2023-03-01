@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/manga_container_grid_view.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/organisms/manga_info_search.dart';
-import 'package:manga_easy_advanced_search/src/presenter/ui/molecules/text_field_search.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/manga_container_grid_view.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/manga_info_search.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/text_field_search.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 

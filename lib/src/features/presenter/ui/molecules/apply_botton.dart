@@ -1,6 +1,6 @@
 import 'package:coffee_cup/features/buttons/coffee_button.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/presenter/controllers/manga_controller.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
 
 class ApplyBottonn extends StatelessWidget {
   final String nameBotton;
