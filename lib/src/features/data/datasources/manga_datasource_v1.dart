@@ -16,8 +16,12 @@ class MangaDatasourceV1 extends MangaDatasource {
     int? offset,
     int? limit,
   }) async {
+    var params = '';
+    if (filter.search != null) {
+      params += 'search=${filter.search}&';
+    }
     var result = await _clientDriver.get(
-      '$url/$version/$path?limit=$limit&offset=$offset',
+      '$url/$version/$path?limit=$limit&offset=$offset&$params',
     );
     return MangaDto.fromJson(result.data);
   }
