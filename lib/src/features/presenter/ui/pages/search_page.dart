@@ -1,10 +1,11 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/manga_container_grid_view.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/manga_info_search.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/text_field_search.dart';
-import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class SearchPage extends StatefulWidget {
@@ -17,12 +18,18 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   bool selectButton = false;
-  late final MangaController _controller;
+  final MangaController _controller = GetIt.I();
 
   @override
   void initState() {
-    _controller = GetIt.I.get<MangaController>();
     super.initState();
+    _controller.init();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -53,11 +60,11 @@ class _SearchPageState extends State<SearchPage> {
               leading: const SizedBox.shrink(),
             ),
             SliverToBoxAdapter(
-                child: ValueListenableBuilder<List<InfoComicModel>?>(
-              valueListenable: _controller.mangas,
-              builder: (_, manga, __) {
-                return manga != null
-                    ? selectButton
+              child: ValueListenableBuilder<SearchState>(
+                valueListenable: _controller.state,
+                builder: (_, state, __) {
+                  if (state is SearchDoneState) {
+                    return selectButton
                         ? Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: GridView.builder(
@@ -70,20 +77,37 @@ class _SearchPageState extends State<SearchPage> {
                                 mainAxisSpacing: 6,
                                 crossAxisSpacing: 7,
                               ),
-                              itemBuilder: (_, idx) =>
-                                  MangaContainerGridView(data: manga[idx]),
-                              itemCount: manga.length,
+                              itemBuilder: (_, idx) => MangaContainerGridView(
+                                  data: state.mangas[idx]),
+                              itemCount: state.mangas.length,
                             ))
                         : ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: manga.length,
+                            itemCount: state.mangas.length,
                             itemBuilder: (_, idx) =>
-                                MangaInfoSearch(manga: manga[idx]),
-                          )
-                    : Container();
-              },
-            ))
+                                MangaInfoSearch(manga: state.mangas[idx]),
+                          );
+                  }
+                  if (state is SearchInitialState) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CoffeeImage.unicorn(
+                          AssetsUnicorn.lendo,
+                          width: 100,
+                          height: 100,
+                        ),
+                        const CoffeeText(text: 'Tente pesquisar algo')
+                      ],
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
