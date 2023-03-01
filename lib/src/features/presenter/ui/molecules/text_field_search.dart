@@ -10,33 +10,30 @@ class TextFieldSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(),
-      child: CoffeeSearchField(
-        onChanged: (_) => ct.mangaFilter.search,
-        suffixIcon: Padding(
-          padding: const EdgeInsets.only(right: 6),
-          child: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              size: 30,
-            ),
-            color: ThemeService.of.backgroundIcon,
-            onPressed: () {
-              showModalBottomSheet<void>(
-                  context: context,
-                  isScrollControlled: true,
-                  backgroundColor: ThemeService.of.backgroundColor,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20)),
-                  ),
-                  builder: (BuildContext context) {
-                    return FilterBottonSheet(ct: ct);
-                  });
-            },
+    return CoffeeSearchField(
+      onChanged: (_) => ct.mangaFilter.search,
+      suffixIcon: Padding(
+        padding: const EdgeInsets.only(right: 6),
+        child: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            size: 30,
           ),
+          color: ThemeService.of.backgroundIcon,
+          onPressed: () {
+            showModalBottomSheet<void>(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: ThemeService.of.backgroundColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                ),
+                builder: (BuildContext context) {
+                  return FilterBottonSheet(ct: ct);
+                });
+          },
         ),
       ),
     );

@@ -45,12 +45,12 @@ class _SearchPageState extends State<SearchPage> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              snap: false,
-              pinned: false,
-              floating: true,
-              title: TextFieldSearch(ct: _controller),
-              shadowColor: Colors.transparent,
+              leadingWidth: 0.0,
               backgroundColor: Colors.transparent,
+              title: TextFieldSearch(ct: _controller),
+              floating: true,
+              pinned: false,
+              leading: const SizedBox.shrink(),
             ),
             SliverToBoxAdapter(
                 child: ValueListenableBuilder<List<InfoComicModel>?>(
@@ -65,16 +65,17 @@ class _SearchPageState extends State<SearchPage> {
                               shrinkWrap: true,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: ratie,
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 6,
-                                      crossAxisSpacing: 7),
+                                childAspectRatio: ratie,
+                                crossAxisCount: 3,
+                                mainAxisSpacing: 6,
+                                crossAxisSpacing: 7,
+                              ),
                               itemBuilder: (_, idx) =>
                                   MangaContainerGridView(data: manga[idx]),
                               itemCount: manga.length,
                             ))
                         : ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: manga.length,
                             itemBuilder: (_, idx) =>

@@ -79,10 +79,7 @@ class FilterBottonSheet extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   height: 68,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  child: ListView(
                     children: [
                       const CoffeeText(
                         text: 'Artista',
