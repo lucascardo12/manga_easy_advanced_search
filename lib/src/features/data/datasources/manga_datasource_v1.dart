@@ -28,6 +28,10 @@ class MangaDatasourceV1 extends MangaDatasource {
       params += 'yearFrom=${filter.yearFrom}&';
       params += 'yearAt=${filter.yearAt}&';
     }
+
+    if (filter.author != null) {
+      params += 'author=${filter.author}&';
+    }
     var result = await _clientDriver.get(
       '$url/$version/$path?limit=$limit&offset=$offset&$params',
     );
