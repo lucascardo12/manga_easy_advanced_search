@@ -20,22 +20,20 @@ class AdvancedMicroApp extends MicroApp {
   @override
   void registerDependencies() {
     //service
-    getIt.registerLazySingleton<ClientDriver>(() => DioDriver());
+    getIt.registerFactory<ClientDriver>(() => DioDriver());
 
     //datasource
-    getIt.registerLazySingleton<MangaDatasource>(
-        () => MangaDatasourceV1(getIt()));
+    getIt.registerFactory<MangaDatasource>(() => MangaDatasourceV1(getIt()));
 
     //repositories
-    getIt.registerLazySingleton<MangaRepository>(
-        () => MangaRepositoryImp(getIt()));
+    getIt.registerFactory<MangaRepository>(() => MangaRepositoryImp(getIt()));
 
     //usecases
-    getIt.registerLazySingleton<GetPopularGenresUseCase>(
+    getIt.registerFactory<GetPopularGenresUseCase>(
         () => GetPopularGenresUseCaseImp());
 
     //controllers
-    getIt.registerLazySingleton<MangaController>(
+    getIt.registerFactory<MangaController>(
       () => MangaController(getIt(), getIt()),
     );
   }
