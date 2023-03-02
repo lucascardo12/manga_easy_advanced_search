@@ -11,7 +11,8 @@ class TextFieldSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CoffeeSearchField(
-      onChanged: (_) => ct.mangaFilter.search,
+      onChanged: (value) => ct.mangaFilter.search = value,
+      onEditingComplete: ct.fetch,
       suffixIcon: Padding(
         padding: const EdgeInsets.only(right: 6),
         child: IconButton(
@@ -22,17 +23,18 @@ class TextFieldSearch extends StatelessWidget {
           color: ThemeService.of.backgroundIcon,
           onPressed: () {
             showModalBottomSheet<void>(
-                context: context,
-                isScrollControlled: true,
-                backgroundColor: ThemeService.of.backgroundColor,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                ),
-                builder: (BuildContext context) {
-                  return FilterBottonSheet(ct: ct);
-                });
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: ThemeService.of.backgroundColor,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+              ),
+              builder: (BuildContext context) {
+                return FilterBottonSheet(ct: ct);
+              },
+            );
           },
         ),
       ),

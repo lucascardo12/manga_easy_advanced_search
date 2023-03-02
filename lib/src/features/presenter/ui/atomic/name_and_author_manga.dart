@@ -5,8 +5,11 @@ import 'package:manga_easy_themes/manga_easy_themes.dart';
 class NameAndAuthorManga extends StatelessWidget {
   final String nameManga;
   final String nameAuthor;
-  const NameAndAuthorManga(
-      {super.key, required this.nameManga, required this.nameAuthor});
+  const NameAndAuthorManga({
+    super.key,
+    required this.nameManga,
+    required this.nameAuthor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +17,11 @@ class NameAndAuthorManga extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CoffeeText(
-            text: nameManga,
-            typography: CoffeeTypography.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis),
+          text: nameManga,
+          typography: CoffeeTypography.title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
         nameAuthor.isEmpty
             ? const SizedBox()
             : Row(
@@ -29,10 +33,8 @@ class NameAndAuthorManga extends StatelessWidget {
                   ),
                   const SizedBox(width: 5),
                   CoffeeText(
-                      text: nameAuthor,
-                      typography: CoffeeTypography.body,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis),
+                    text: nameAuthor,
+                  ),
                 ],
               ),
       ],

@@ -1,7 +1,6 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/apply_botton.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_sheet_botton.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
@@ -44,20 +43,19 @@ class SeeMoreTextButton extends StatelessWidget {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             spacing: 2,
                             children: GenerosModel.carregaGeneros()
-                                .map(
-                                  (e) => CategorySelectSheetBotton(
+                                .map((e) => CategorySelectSheetBotton(
                                       gender: e,
-                                      ct: ct.filterNotifier.value.genders),
-                                )
+                                      filterGenders: ct.mangaFilter.genders,
+                                    ))
                                 .toList(),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 6),
-                    ApplyBottonn(
-                      nameBotton: 'Aplicar',
-                      ct: ct,
+                    CoffeeButton(
+                      label: 'Aplicar',
+                      onPress: () => Navigator.pop(context),
                     )
                   ],
                 ),

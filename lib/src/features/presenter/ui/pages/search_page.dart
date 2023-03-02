@@ -60,14 +60,14 @@ class _SearchPageState extends State<SearchPage> {
               leading: const SizedBox.shrink(),
             ),
             SliverToBoxAdapter(
-              child: ValueListenableBuilder<SearchState>(
-                valueListenable: _controller.state,
-                builder: (_, state, __) {
-                  if (state is SearchDoneState) {
-                    return selectButton
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: GridView.builder(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ValueListenableBuilder<SearchState>(
+                  valueListenable: _controller.state,
+                  builder: (_, state, __) {
+                    if (state is SearchDoneState) {
+                      return selectButton
+                          ? GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               gridDelegate:
@@ -80,32 +80,47 @@ class _SearchPageState extends State<SearchPage> {
                               itemBuilder: (_, idx) => MangaContainerGridView(
                                   data: state.mangas[idx]),
                               itemCount: state.mangas.length,
-                            ))
-                        : ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: state.mangas.length,
-                            itemBuilder: (_, idx) =>
-                                MangaInfoSearch(manga: state.mangas[idx]),
-                          );
-                  }
-                  if (state is SearchInitialState) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CoffeeImage.unicorn(
-                          AssetsUnicorn.lendo,
-                          width: 100,
-                          height: 100,
-                        ),
-                        const CoffeeText(text: 'Tente pesquisar algo')
-                      ],
+                            )
+                          : ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: state.mangas.length,
+                              itemBuilder: (_, idx) =>
+                                  MangaInfoSearch(manga: state.mangas[idx]),
+                            );
+                    }
+                    if (state is SearchInitialState) {
+                      return Column(
+                        children: [
+                          CoffeeImage.unicorn(
+                            AssetsUnicorn.lendo,
+                            width: 100,
+                            height: 100,
+                          ),
+                          const CoffeeText(text: 'Tente pesquisar algo')
+                        ],
+                      );
+                    }
+
+                    if (state is SearchNotfoundState) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CoffeeImage.unicorn(
+                            AssetsUnicorn.sad,
+                            width: 100,
+                            height: 100,
+                          ),
+                          CoffeeText(text: state.message)
+                        ],
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                  },
+                ),
               ),
             )
           ],

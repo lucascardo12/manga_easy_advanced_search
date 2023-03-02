@@ -10,10 +10,11 @@ class DescriptionManga extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 15),
       child: CoffeeText(
-          text: description,
-          typography: CoffeeTypography.body,
-          maxLines: 7,
-          overflow: TextOverflow.ellipsis),
+        text: description,
+        typography: CoffeeTypography.body,
+        maxLines: 5,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }

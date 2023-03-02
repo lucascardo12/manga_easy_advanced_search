@@ -15,35 +15,39 @@ class MangaInfoSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     final generos = manga.generos.split('<>').toList();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.only(top: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(width: 20),
           ImageManga(imageManga: manga.thumb),
           const SizedBox(width: 15),
-          Expanded(
+          SizedBox(
+            height: 200,
+            width: MediaQuery.of(context).size.width - 125 - 32 - 15,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
                 NameAndAuthorManga(
-                    nameManga: manga.name, nameAuthor: manga.autor),
+                  nameManga: manga.name,
+                  nameAuthor: manga.autor,
+                ),
                 SizedBox(
                   height: 30,
-                  width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: generos.length,
                     itemBuilder: (context, index) {
                       final indexGender = generos[index];
-                      final genero =
-                          GenerosModel.carregaGeneros(codigo: indexGender);
+                      final genero = GenerosModel.carregaGeneros(
+                        codigo: indexGender,
+                      );
                       return genero.isNotEmpty
                           ? GenreManga(gender: genero.first)
-                          : SizedBox(
-                              height: 20,
-                              child: Center(
+                          : Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 6),
                                 child: CoffeeText(text: indexGender),
                               ),
                             );
@@ -52,7 +56,7 @@ class MangaInfoSearch extends StatelessWidget {
                 ),
                 DescriptionManga(
                   description: manga.sinopse,
-                )
+                ),
               ],
             ),
           ),
