@@ -116,6 +116,21 @@ class _SearchPageState extends State<SearchPage> {
                         ],
                       );
                     }
+
+                    if (state is SearchErrorState) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CoffeeImage.unicorn(
+                            AssetsUnicorn.fire,
+                            width: 100,
+                            height: 100,
+                          ),
+                          CoffeeText(text: state.message)
+                        ],
+                      );
+                    }
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
