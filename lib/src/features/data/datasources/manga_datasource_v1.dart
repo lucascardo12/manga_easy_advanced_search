@@ -20,6 +20,9 @@ class MangaDatasourceV1 extends MangaDatasource {
     if (filter.search != null) {
       params += 'search=${filter.search}&';
     }
+    if (filter.genders.isNotEmpty) {
+      params += 'genders=${filter.genders.join('<>')}&';
+    }
     var result = await _clientDriver.get(
       '$url/$version/$path?limit=$limit&offset=$offset&$params',
     );
