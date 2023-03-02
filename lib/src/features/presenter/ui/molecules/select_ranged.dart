@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
 
 class SelectRanged extends StatefulWidget {
@@ -15,8 +16,17 @@ class _SelectRangedState extends State<SelectRanged> {
   late RangeValues _currentRangeValues;
   @override
   void initState() {
-    _currentRangeValues =
-        RangeValues(yearStart, DateTime.now().year.toDouble());
+    MangaFilterEntity filterEntity = widget.ct.mangaFilter;
+    if (filterEntity.yearAt != null && filterEntity.yearFrom != null) {
+      _currentRangeValues = RangeValues(
+        filterEntity.yearFrom!.toDouble(),
+        filterEntity.yearAt!.toDouble(),
+      );
+    } else {
+      _currentRangeValues =
+          RangeValues(yearStart, DateTime.now().year.toDouble());
+    }
+
     super.initState();
   }
 
