@@ -1,8 +1,7 @@
-import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
@@ -52,42 +51,7 @@ class _SearchPageState extends State<SearchPage> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              floating: true,
-              pinned: false,
-              leading: Container(),
-              leadingWidth: 0.0,
-              backgroundColor: Colors.transparent,
-              title: CoffeeSearchField(
-                onEditingComplete: _controller.fetch,
-                controller: _controller.searchController,
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.only(right: 6),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.menu,
-                      size: 30,
-                    ),
-                    color: ThemeService.of.backgroundIcon,
-                    onPressed: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        isScrollControlled: true,
-                        backgroundColor: ThemeService.of.backgroundColor,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20)),
-                        ),
-                        builder: (BuildContext context) {
-                          return FilterBottonSheet(ct: _controller);
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
+            SliverAppBarSearchAndFilter(ct: _controller),
             SliverToBoxAdapter(
               child: Text(
                   'Voce tem ${_controller.activeFilters()} filtros ativos'),
