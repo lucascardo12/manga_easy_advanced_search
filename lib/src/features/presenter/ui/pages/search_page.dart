@@ -2,10 +2,11 @@ import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/manga_container_grid_view.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/manga_info_search.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/text_field_search.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_not_found_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
@@ -35,7 +36,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    var ratie = (MediaQuery.of(context).size.width / 800);
     return Scaffold(
       backgroundColor: ThemeService.of.backgroundColor,
       floatingActionButton: FloatingActionButton(
@@ -61,7 +61,6 @@ class _SearchPageState extends State<SearchPage> {
               title: CoffeeSearchField(
                 onEditingComplete: _controller.fetch,
                 controller: _controller.searchController,
-                showBackOnly: true,
                 suffixIcon: Padding(
                   padding: const EdgeInsets.only(right: 6),
                   child: IconButton(
@@ -90,76 +89,29 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             SliverToBoxAdapter(
+              child: Text(
+                  'Voce tem ${_controller.activeFilters()} filtros ativos'),
+            ),
+            SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: ValueListenableBuilder<SearchState>(
                   valueListenable: _controller.state,
                   builder: (_, state, __) {
                     if (state is SearchDoneState) {
-                      return selectButton
-                          ? GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: ratie,
-                                crossAxisCount: 3,
-                                mainAxisSpacing: 6,
-                                crossAxisSpacing: 7,
-                              ),
-                              itemBuilder: (_, idx) => MangaContainerGridView(
-                                  data: state.mangas[idx]),
-                              itemCount: state.mangas.length,
-                            )
-                          : ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: state.mangas.length,
-                              itemBuilder: (_, idx) =>
-                                  MangaInfoSearch(manga: state.mangas[idx]),
-                            );
+                      return SearchDoneStatePage(
+                          selectButton: selectButton, data: state.mangas);
                     }
                     if (state is SearchInitialState) {
-                      return Column(
-                        children: [
-                          CoffeeImage.unicorn(
-                            AssetsUnicorn.lendo,
-                            width: 100,
-                            height: 100,
-                          ),
-                          const CoffeeText(text: 'Tente pesquisar algo')
-                        ],
-                      );
+                      return const SearchInitialStatePage();
                     }
 
                     if (state is SearchNotfoundState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CoffeeImage.unicorn(
-                            AssetsUnicorn.sad,
-                            width: 100,
-                            height: 100,
-                          ),
-                          CoffeeText(text: state.message)
-                        ],
-                      );
+                      return SearchNotFoundStatePage(message: state.message);
                     }
 
                     if (state is SearchErrorState) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CoffeeImage.unicorn(
-                            AssetsUnicorn.fire,
-                            width: 100,
-                            height: 100,
-                          ),
-                          CoffeeText(text: state.message)
-                        ],
-                      );
+                      return SearchErrorStatePage(message: state.message);
                     }
                     return const Center(
                       child: CircularProgressIndicator(),
