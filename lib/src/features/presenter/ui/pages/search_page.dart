@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/manga_container_grid_view.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/manga_info_search.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/text_field_search.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
@@ -52,12 +53,41 @@ class _SearchPageState extends State<SearchPage> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              leadingWidth: 0.0,
-              backgroundColor: Colors.transparent,
-              title: TextFieldSearch(ct: _controller),
               floating: true,
               pinned: false,
-              leading: const SizedBox.shrink(),
+              leading: Container(),
+              leadingWidth: 0.0,
+              backgroundColor: Colors.transparent,
+              title: CoffeeSearchField(
+                onEditingComplete: _controller.fetch,
+                controller: _controller.searchController,
+                showBackOnly: true,
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.menu,
+                      size: 30,
+                    ),
+                    color: ThemeService.of.backgroundIcon,
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: ThemeService.of.backgroundColor,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20)),
+                        ),
+                        builder: (BuildContext context) {
+                          return FilterBottonSheet(ct: _controller);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
             SliverToBoxAdapter(
               child: Padding(

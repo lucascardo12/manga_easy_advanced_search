@@ -16,6 +16,8 @@ class MangaController {
   final ValueNotifier<SearchState> state = ValueNotifier(SearchInitialState());
   List<GenerosModel> popularGender = [];
 
+  final TextEditingController searchController = TextEditingController();
+
   void init() {
     loadingPopularGenders();
   }
@@ -31,6 +33,11 @@ class MangaController {
 
   void fetch() async {
     try {
+      if (searchController.text.isNotEmpty) {
+        mangaFilter.search = searchController.text;
+      } else {
+        mangaFilter.search = null;
+      }
       state.value = SearchLoadingState();
       var result = await _mangaRepository.getManga(filter: mangaFilter);
       if (result.isEmpty) {
