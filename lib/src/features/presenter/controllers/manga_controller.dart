@@ -31,6 +31,16 @@ class MangaController {
     popularGender = getPopularGenderCase();
   }
 
+  int activeFilters() {
+    var cont = 0;
+    int genders = mangaFilter.genders.length;
+    // if (mangaFilter.author.isNotEmpty) {
+    //   cont += 1;
+    // }
+
+    return cont + genders;
+  }
+
   void fetch() async {
     try {
       if (searchController.text.isNotEmpty) {

@@ -1,7 +1,7 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_sheet_botton.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/see_more_text_button.dart';
 
 class SelectGenderBottonSheet extends StatelessWidget {
@@ -28,7 +28,7 @@ class SelectGenderBottonSheet extends StatelessWidget {
             itemCount: ct.getPopularGenderCase().length,
             itemBuilder: (context, index) {
               final gender = ct.getPopularGenderCase()[index];
-              return CategorySelectSheetBotton(
+              return CategorySelectBottonSheet(
                 gender: gender,
                 filterGenders: ct.mangaFilter.genders,
               );
