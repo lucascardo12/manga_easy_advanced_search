@@ -1,9 +1,10 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_ranged.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/see_more_text_button.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_sheet_botton.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_author_botton_sheet.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_data_botton_sheet.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_gender_botton_sheet.dart';
 
 class FilterBottonSheet extends StatelessWidget {
   final MangaController ct;
@@ -22,31 +23,19 @@ class FilterBottonSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CoffeeText(text: 'Filtrar', typography: CoffeeTypography.title),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const CoffeeText(
-                text: 'Gêneros',
-              ),
-              SeeMoreTextButton(ct: ct)
+                  text: 'Filtrar', typography: CoffeeTypography.title),
+              IconButton(
+                  onPressed: () {
+                    ct.mangaFilter = MangaFilterEntity(genders: []);
+                  },
+                  icon: const Icon(Icons.replay_outlined)),
             ],
           ),
-          SizedBox(
-            height: 40,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: ct.getPopularGenderCase().length,
-              itemBuilder: (context, index) {
-                final gender = ct.getPopularGenderCase()[index];
-                return CategorySelectSheetBotton(
-                  gender: gender,
-                  filterGenders: ct.mangaFilter.genders,
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 15),
+          SelectGenderBottonSheet(ct: ct),
+          //const SizedBox(height: 15),
           // const CoffeeText(
           //   text: 'Avaliação',
           // ),
@@ -57,41 +46,9 @@ class FilterBottonSheet extends StatelessWidget {
           const SizedBox(height: 15),
           Row(
             children: [
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CoffeeText(
-                        text: 'Data', typography: CoffeeTypography.body),
-                    const SizedBox(height: 10),
-                    SelectRanged(
-                      ct: ct,
-                    )
-                  ],
-                ),
-              ),
+              SelectDataBottonSheet(ct: ct),
               const SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CoffeeText(
-                      text: 'Artista',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CoffeeField(
-                      onChanged: (e) => ct.mangaFilter.author = e,
-                      hintText: 'Nome do artista',
-                      height: 44,
-                      contentPadding: const EdgeInsets.only(left: 14),
-                    ),
-                  ],
-                ),
-              )
+              SelectAuthorBottonSheet(ct: ct),
             ],
           ),
           const SizedBox(height: 10),
