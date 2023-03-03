@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
-class CategorySelectSheetBotton extends StatefulWidget {
+class CategorySelectBottonSheet extends StatefulWidget {
   final GenerosModel gender;
   final List<String> filterGenders;
-  const CategorySelectSheetBotton({
+  const CategorySelectBottonSheet({
     super.key,
     required this.gender,
     required this.filterGenders,
   });
 
   @override
-  State<CategorySelectSheetBotton> createState() =>
-      _CategorySelectSheetBottonState();
+  State<CategorySelectBottonSheet> createState() =>
+      _CategorySelectBottonSheetState();
 }
 
-class _CategorySelectSheetBottonState extends State<CategorySelectSheetBotton> {
+class _CategorySelectBottonSheetState extends State<CategorySelectBottonSheet> {
   @override
   Widget build(BuildContext context) {
     return InkWell(

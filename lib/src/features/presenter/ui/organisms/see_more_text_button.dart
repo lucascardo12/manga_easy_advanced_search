@@ -1,7 +1,7 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_sheet_botton.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/category_select_botton_sheet.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
@@ -43,7 +43,7 @@ class SeeMoreTextButton extends StatelessWidget {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             spacing: 2,
                             children: GenerosModel.carregaGeneros()
-                                .map((e) => CategorySelectSheetBotton(
+                                .map((e) => CategorySelectBottonSheet(
                                       gender: e,
                                       filterGenders: ct.mangaFilter.genders,
                                     ))
