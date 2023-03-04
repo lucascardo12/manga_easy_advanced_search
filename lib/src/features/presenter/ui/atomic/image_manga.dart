@@ -1,5 +1,6 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class ImageManga extends StatelessWidget {
   final String imageManga;
@@ -12,6 +13,7 @@ class ImageManga extends StatelessWidget {
       height: 200,
       width: 125,
       cover: imageManga,
+      headers: Global.header,
     );
   }
 }

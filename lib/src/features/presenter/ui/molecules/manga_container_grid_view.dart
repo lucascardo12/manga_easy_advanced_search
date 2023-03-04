@@ -17,6 +17,7 @@ class MangaContainerGridView extends StatelessWidget {
           cover: data.thumb,
           height: 200,
           width: 125,
+          headers: Global.header,
         ),
         SizedBox(
           height: 30,
