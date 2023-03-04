@@ -59,27 +59,31 @@ class _SearchPageState extends State<SearchPage> {
               child: ValueListenableBuilder<int>(
                   valueListenable: _controller.filterActive,
                   builder: (_, active, __) {
-                    return Column(
-                      children: [
-                        const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            CoffeeText(text: 'Voce tem $active filtros ativos'),
-                            const SizedBox(height: 5),
-                            GestureDetector(
-                              onTap: () {
-                                _controller.mangaFilter =
-                                    MangaFilterEntity(genders: []);
-                                _controller.fetch();
-                              },
-                              child: const Icon(Icons.clear),
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                      ],
+                    return Visibility(
+                      visible: _controller.activeFilters() > 0,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CoffeeText(
+                                  text: 'Você tem $active filtros ativos'),
+                              const SizedBox(height: 5),
+                              GestureDetector(
+                                onTap: () {
+                                  _controller.mangaFilter =
+                                      MangaFilterEntity(genders: []);
+                                  _controller.fetch();
+                                },
+                                child: Icon(Icons.clear,
+                                    color: ThemeService.of.primaryColor),
+                              ),
+                              const SizedBox(width: 10),
+                            ],
+                          ),
+                        ],
+                      ),
                     );
                   }),
             ),
