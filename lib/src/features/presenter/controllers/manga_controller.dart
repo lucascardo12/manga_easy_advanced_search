@@ -3,6 +3,7 @@ import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_fi
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaController {
@@ -34,10 +35,12 @@ class MangaController {
   int activeFilters() {
     var cont = 0;
     int genders = mangaFilter.genders.length;
-    // if (mangaFilter.author.isNotEmpty) {
-    //   cont += 1;
-    // }
-
+    if (mangaFilter.author != null) {
+      cont += 1;
+    }
+    if (mangaFilter.yearAt != null || mangaFilter.yearFrom != null) {
+      cont += 1;
+    }
     return cont + genders;
   }
 

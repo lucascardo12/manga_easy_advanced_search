@@ -7,6 +7,7 @@ import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/searc
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_not_found_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class SearchPage extends StatefulWidget {
