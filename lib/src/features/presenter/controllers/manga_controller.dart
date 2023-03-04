@@ -19,6 +19,8 @@ class MangaController {
 
   final TextEditingController searchController = TextEditingController();
 
+  final ValueNotifier<int> filterActive = ValueNotifier(0);
+
   void init() {
     loadingPopularGenders();
   }
@@ -60,6 +62,7 @@ class MangaController {
         return;
       }
       state.value = SearchDoneState(result);
+      filterActive.value = activeFilters();
     } catch (e) {
       state.value = SearchErrorState(e.toString());
     }

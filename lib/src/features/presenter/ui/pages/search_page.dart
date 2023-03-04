@@ -1,5 +1,7 @@
+import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
@@ -54,8 +56,32 @@ class _SearchPageState extends State<SearchPage> {
           slivers: [
             SliverAppBarSearchAndFilter(ct: _controller),
             SliverToBoxAdapter(
-              child: Text(
-                  'Voce tem ${_controller.activeFilters()} filtros ativos'),
+              child: ValueListenableBuilder<int>(
+                  valueListenable: _controller.filterActive,
+                  builder: (_, active, __) {
+                    return Column(
+                      children: [
+                        const SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            CoffeeText(text: 'Voce tem $active filtros ativos'),
+                            const SizedBox(height: 5),
+                            GestureDetector(
+                              onTap: () {
+                                _controller.mangaFilter =
+                                    MangaFilterEntity(genders: []);
+                                _controller.fetch();
+                              },
+                              child: const Icon(Icons.clear),
+                            ),
+                            const SizedBox(width: 10),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                      ],
+                    );
+                  }),
             ),
             SliverToBoxAdapter(
               child: Padding(
