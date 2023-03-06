@@ -14,7 +14,7 @@ dependencies:
   manga_easy_themes:
     git:
       url: https://github.com/manga-easy/manga_easy_themes.git
-      ref: 1.0.1
+      ref: 1.0.2
   manga_easy_sdk:
     git:
       url: https://github.com/manga-easy/manga_easy_sdk.git
