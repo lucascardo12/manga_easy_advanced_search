@@ -13,15 +13,15 @@ dependencies:
     sdk: flutter
   manga_easy_themes:
     git:
-      url: https://github.com/lucascardo12/manga_easy_themes.git
+      url: https://github.com/manga-easy/manga_easy_themes.git
       ref: 1.0.1
   manga_easy_sdk:
     git:
-      url: https://github.com/lucascardo12/manga_easy_sdk.git
+      url: https://github.com/manga-easy/manga_easy_sdk.git
       ref: v.0.11.x
   coffee_cup:
     git:
-      url: https://github.com/lucascardo12/manga_easy_coffee_cup.git
+      url: https://github.com/manga-easy/manga_easy_coffee_cup.git
       ref: v0.11.x
   dio: ^4.0.6
   get_it: ^7.2.0
