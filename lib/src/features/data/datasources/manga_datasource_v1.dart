@@ -6,7 +6,7 @@ import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_fi
 class MangaDatasourceV1 extends MangaDatasource {
   final ClientDriver _clientDriver;
   final String path = 'catalog';
-  final String url = 'http://test-catalog.lucas-cm.com.br';
+  final String url = 'http://catalog.lucas-cm.com.br';
   final String version = 'v1';
 
   MangaDatasourceV1(this._clientDriver);
