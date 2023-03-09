@@ -14,7 +14,7 @@ class MangaInfoSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final generos = manga.generos.split('<>').toList();
+    final generos = manga.genres.split('<>').toList();
     return InkWell(
       onTap: () => Navigator.pushNamed(
         context,
@@ -40,7 +40,7 @@ class MangaInfoSearch extends StatelessWidget {
                   const SizedBox(height: 5),
                   NameAndAuthorManga(
                     nameManga: manga.name,
-                    nameAuthor: manga.autor,
+                    nameAuthor: manga.author,
                   ),
                   SizedBox(
                     height: 30,
@@ -65,7 +65,7 @@ class MangaInfoSearch extends StatelessWidget {
                     ),
                   ),
                   DescriptionManga(
-                    description: manga.sinopse,
+                    description: manga.synopsis,
                   ),
                 ],
               ),
