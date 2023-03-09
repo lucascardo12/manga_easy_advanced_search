@@ -5,6 +5,7 @@ import 'package:manga_easy_advanced_search/share/drivers/dio_driver.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource_v1.dart';
 import 'package:manga_easy_advanced_search/src/features/data/repositories/manga_repository_imp.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/mappers/mapper_manga.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case_imp.dart';
@@ -19,6 +20,8 @@ class AdvancedMicroApp extends MicroApp {
 
   @override
   void registerDependencies() {
+    //mappers
+    getIt.registerFactory(() => MapperManga());
     //service
     getIt.registerFactory<ClientDriver>(() => DioDriver());
 
@@ -26,7 +29,9 @@ class AdvancedMicroApp extends MicroApp {
     getIt.registerFactory<MangaDatasource>(() => MangaDatasourceV1(getIt()));
 
     //repositories
-    getIt.registerFactory<MangaRepository>(() => MangaRepositoryImp(getIt()));
+    getIt.registerFactory<MangaRepository>(
+      () => MangaRepositoryImp(getIt(), getIt()),
+    );
 
     //usecases
     getIt.registerFactory<GetPopularGenresUseCase>(
