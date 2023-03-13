@@ -6,7 +6,7 @@ import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/searc
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
-class MangaController {
+class MangaController extends ChangeNotifier {
   final MangaRepository _mangaRepository;
   final GetPopularGenresUseCase getPopularGenderCase;
 
@@ -25,7 +25,9 @@ class MangaController {
     loadingPopularGenders();
   }
 
+  @override
   void dispose() {
+    super.dispose();
     state.dispose();
     popularGender.clear();
   }
@@ -46,6 +48,11 @@ class MangaController {
     return cont + genders;
   }
 
+  int totalItens = 0;
+  int pag = 0;
+  final int _carregarItens = 20;
+  List<InfoComicModel> listScreen = [];
+
   void fetch() async {
     try {
       if (searchController.text.isNotEmpty) {
@@ -53,16 +60,32 @@ class MangaController {
       } else {
         mangaFilter.search = null;
       }
+
       state.value = SearchLoadingState();
-      var result = await _mangaRepository.getManga(filter: mangaFilter);
-      if (result.isEmpty) {
+      var result = await _mangaRepository.getManga(
+        filter: mangaFilter,
+        limit: _carregarItens,
+        offset: pag,
+      );
+
+      bool incluiu = false;
+      for (var i in result) {
+        incluiu = true;
+        listScreen.add(i);
+      }
+      if (incluiu == true) {
+        totalItens = listScreen.length;
+      }
+
+      if (listScreen.isEmpty) {
         state.value = SearchNotfoundState(
           'Não encontramos mangá para sua pesquisa ou filtro, tente limpar os filtros.',
         );
         return;
       }
-      state.value = SearchDoneState(result);
+      state.value = SearchDoneState(listScreen);
       filterActive.value = activeFilters();
+      notifyListeners();
     } catch (e) {
       state.value = SearchErrorState(e.toString());
     }

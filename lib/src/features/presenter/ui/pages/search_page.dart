@@ -28,6 +28,9 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     _controller.init();
+    _controller.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -74,6 +77,8 @@ class _SearchPageState extends State<SearchPage> {
                                 onTap: () {
                                   _controller.mangaFilter =
                                       MangaFilterEntity(genders: []);
+                                  _controller.listScreen.clear();
+                                  _controller.pag = 0 ;
                                   _controller.fetch();
                                 },
                                 child: Icon(Icons.clear,
@@ -95,7 +100,9 @@ class _SearchPageState extends State<SearchPage> {
                   builder: (_, state, __) {
                     if (state is SearchDoneState) {
                       return SearchDoneStatePage(
-                          selectButton: selectButton, data: state.mangas);
+                          ct: _controller,
+                          selectButton: selectButton,
+                          data: state.mangas);
                     }
                     if (state is SearchInitialState) {
                       return const SearchInitialStatePage();
