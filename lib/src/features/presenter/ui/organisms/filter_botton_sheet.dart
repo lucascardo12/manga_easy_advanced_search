@@ -55,7 +55,7 @@ class FilterBottonSheet extends StatelessWidget {
           CoffeeButton(
             label: 'Aplicar filtro',
             onPress: () {
-              ct.fetch();
+              ct.pagingController.refresh();
               Navigator.of(context).pop();
             },
           ),

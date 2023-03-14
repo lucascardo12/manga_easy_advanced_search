@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
@@ -14,29 +15,35 @@ class MangaController extends ChangeNotifier {
 
   MangaFilterEntity mangaFilter = MangaFilterEntity(genders: []);
 
-  final ValueNotifier<SearchState> state = ValueNotifier(SearchInitialState());
+  SearchState state = SearchInitialState();
   List<GenerosModel> popularGender = [];
+  final PagingController<int, InfoComicModel> pagingController =
+      PagingController(firstPageKey: 0);
 
   final TextEditingController searchController = TextEditingController();
 
-  final ValueNotifier<int> filterActive = ValueNotifier(0);
-
   void init() {
+    pagingController.addStatusListener((status) {
+      print('status: $status');
+    });
+    pagingController.addPageRequestListener(
+      (pageKey) => fetch(pageKey),
+    );
     loadingPopularGenders();
   }
 
   @override
   void dispose() {
     super.dispose();
-    state.dispose();
     popularGender.clear();
+    pagingController.dispose();
   }
 
   void loadingPopularGenders() {
     popularGender = getPopularGenderCase();
   }
 
-  int activeFilters() {
+  int get activeFilters {
     var cont = 0;
     int genders = mangaFilter.genders.length;
     if (mangaFilter.author != null) {
@@ -48,46 +55,42 @@ class MangaController extends ChangeNotifier {
     return cont + genders;
   }
 
-  int totalItens = 0;
-  int pag = 0;
-  final int _carregarItens = 20;
-  List<InfoComicModel> listScreen = [];
+  final int _pageSize = 20;
 
-  void fetch() async {
+  void fetch(int pageKey) async {
     try {
+      Helps.log('fetch : \n');
       if (searchController.text.isNotEmpty) {
         mangaFilter.search = searchController.text;
       } else {
         mangaFilter.search = null;
       }
-
-      state.value = SearchLoadingState();
+      state = SearchLoadingState();
       var result = await _mangaRepository.getManga(
         filter: mangaFilter,
-        limit: _carregarItens,
-        offset: pag,
+        limit: _pageSize,
+        offset: pageKey,
       );
 
-      bool incluiu = false;
-      for (var i in result) {
-        incluiu = true;
-        listScreen.add(i);
-      }
-      if (incluiu == true) {
-        totalItens = listScreen.length;
+      final isLastPage = result.length < _pageSize;
+      if (isLastPage) {
+        pagingController.appendLastPage(result);
+      } else {
+        final nextPageKey = pageKey + result.length;
+        pagingController.appendPage(result, nextPageKey);
       }
 
-      if (listScreen.isEmpty) {
-        state.value = SearchNotfoundState(
-          'Não encontramos mangá para sua pesquisa ou filtro, tente limpar os filtros.',
-        );
-        return;
-      }
-      state.value = SearchDoneState(listScreen);
-      filterActive.value = activeFilters();
-      notifyListeners();
+      state = SearchDoneState([]);
     } catch (e) {
-      state.value = SearchErrorState(e.toString());
+      pagingController.error = e;
+      state = SearchErrorState(e.toString());
     }
+    notifyListeners();
+  }
+
+  void clearFilter() {
+    mangaFilter = MangaFilterEntity(genders: []);
+    state = SearchInitialState();
+    notifyListeners();
   }
 }

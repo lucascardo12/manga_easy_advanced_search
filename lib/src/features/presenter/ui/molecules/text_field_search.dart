@@ -12,7 +12,6 @@ class TextFieldSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return CoffeeSearchField(
       onChanged: (value) => ct.mangaFilter.search = value,
-      onEditingComplete: ct.fetch,
       suffixIcon: Padding(
         padding: const EdgeInsets.only(right: 6),
         child: IconButton(

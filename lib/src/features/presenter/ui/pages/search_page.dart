@@ -59,68 +59,56 @@ class _SearchPageState extends State<SearchPage> {
           slivers: [
             SliverAppBarSearchAndFilter(ct: _controller),
             SliverToBoxAdapter(
-              child: ValueListenableBuilder<int>(
-                  valueListenable: _controller.filterActive,
-                  builder: (_, active, __) {
-                    return Visibility(
-                      visible: _controller.activeFilters() > 0,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CoffeeText(
-                                  text: 'Você tem $active filtros ativos'),
-                              const SizedBox(height: 5),
-                              GestureDetector(
-                                onTap: () {
-                                  _controller.mangaFilter =
-                                      MangaFilterEntity(genders: []);
-                                  _controller.listScreen.clear();
-                                  _controller.pag = 0 ;
-                                  _controller.fetch();
-                                },
-                                child: Icon(Icons.clear,
-                                    color: ThemeService.of.primaryColor),
-                              ),
-                              const SizedBox(width: 10),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ValueListenableBuilder<SearchState>(
-                  valueListenable: _controller.state,
-                  builder: (_, state, __) {
-                    if (state is SearchDoneState) {
-                      return SearchDoneStatePage(
-                          ct: _controller,
-                          selectButton: selectButton,
-                          data: state.mangas);
-                    }
-                    if (state is SearchInitialState) {
-                      return const SearchInitialStatePage();
-                    }
-
-                    if (state is SearchNotfoundState) {
-                      return SearchNotFoundStatePage(message: state.message);
-                    }
-
-                    if (state is SearchErrorState) {
-                      return SearchErrorStatePage(message: state.message);
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
+              child: Visibility(
+                visible: _controller.activeFilters > 0,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CoffeeText(
+                            text:
+                                'Você tem ${_controller.activeFilters} filtros ativos'),
+                        const SizedBox(height: 5),
+                        GestureDetector(
+                          onTap: _controller.clearFilter,
+                          child: Icon(Icons.clear,
+                              color: ThemeService.of.primaryColor),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
+                    ),
+                  ],
                 ),
               ),
+            ),
+            Builder(
+              builder: (_) {
+                final state = _controller.state;
+                if (state is SearchDoneState) {
+                  return SearchDoneStatePage(
+                    ct: _controller,
+                    selectButton: selectButton,
+                    data: state.mangas,
+                  );
+                }
+                if (state is SearchInitialState) {
+                  return const SliverToBoxAdapter(
+                    child: SearchInitialStatePage(),
+                  );
+                }
+                if (state is SearchNotfoundState) {
+                  return SliverToBoxAdapter(
+                    child: SearchNotFoundStatePage(message: state.message),
+                  );
+                }
+                return const SliverToBoxAdapter(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              },
             )
           ],
         ),

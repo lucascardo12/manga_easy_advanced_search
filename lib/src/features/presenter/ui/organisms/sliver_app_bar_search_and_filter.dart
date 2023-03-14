@@ -17,8 +17,9 @@ class SliverAppBarSearchAndFilter extends StatelessWidget {
       leadingWidth: 0.0,
       backgroundColor: Colors.transparent,
       title: CoffeeSearchField(
-        onEditingComplete: ct.fetch,
+        onEditingComplete: () => ct.fetch(0),
         controller: ct.searchController,
+        showBackOnly: true,
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 6),
           child: IconButton(
