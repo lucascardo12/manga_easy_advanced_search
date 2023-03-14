@@ -57,7 +57,7 @@ class MangaInfoSearch extends StatelessWidget {
                             ? GenreManga(gender: genero.first)
                             : Center(
                                 child: Padding(
-                                  padding: EdgeInsets.only(right: 6),
+                                  padding: const EdgeInsets.only(right: 6),
                                   child: CoffeeText(text: indexGender),
                                 ),
                               );
