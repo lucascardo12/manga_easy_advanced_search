@@ -20,7 +20,7 @@ class MangaController extends ChangeNotifier {
   final PagingController<int, InfoComicModel> pagingController =
       PagingController(firstPageKey: 0);
 
-  final TextEditingController searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
   void init() {
     pagingController.addStatusListener((status) {
@@ -61,6 +61,7 @@ class MangaController extends ChangeNotifier {
     try {
       Helps.log('fetch : \n');
       if (searchController.text.isNotEmpty) {
+        pagingController.refresh();
         mangaFilter.search = searchController.text;
       } else {
         mangaFilter.search = null;
