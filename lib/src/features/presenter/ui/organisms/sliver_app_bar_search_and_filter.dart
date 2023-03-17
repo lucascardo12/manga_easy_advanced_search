@@ -25,8 +25,7 @@ class SliverAppBarSearchAndFilter extends StatelessWidget {
             child: IconButton(
               icon: const Icon(Icons.clear),
               onPressed: () {
-                ct.searchController.clear();
-                ct.clearFilter();
+                ct.clearText();
               },
             )),
       ),
