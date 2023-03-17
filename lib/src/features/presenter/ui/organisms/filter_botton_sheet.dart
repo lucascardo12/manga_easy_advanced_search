@@ -6,10 +6,15 @@ import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/s
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_data_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/select_gender_botton_sheet.dart';
 
-class FilterBottonSheet extends StatelessWidget {
+class FilterBottonSheet extends StatefulWidget {
   final MangaController ct;
   const FilterBottonSheet({super.key, required this.ct});
 
+  @override
+  State<FilterBottonSheet> createState() => _FilterBottonSheetState();
+}
+
+class _FilterBottonSheetState extends State<FilterBottonSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,12 +34,15 @@ class FilterBottonSheet extends StatelessWidget {
                   text: 'Filtrar', typography: CoffeeTypography.title),
               IconButton(
                   onPressed: () {
-                    ct.mangaFilter = MangaFilterEntity(genders: []);
+                    setState(() {
+                      widget.ct.mangaFilter = MangaFilterEntity(genders: []);
+                      widget.ct.pagingController.refresh();
+                    });
                   },
                   icon: const Icon(Icons.replay_outlined)),
             ],
           ),
-          SelectGenderBottonSheet(ct: ct),
+          SelectGenderBottonSheet(ct: widget.ct),
           //const SizedBox(height: 15),
           // const CoffeeText(
           //   text: 'Avaliação',
@@ -46,16 +54,16 @@ class FilterBottonSheet extends StatelessWidget {
           const SizedBox(height: 15),
           Row(
             children: [
-              SelectDataBottonSheet(ct: ct),
+              SelectDataBottonSheet(ct: widget.ct),
               const SizedBox(width: 20),
-              SelectAuthorBottonSheet(ct: ct),
+              SelectAuthorBottonSheet(ct: widget.ct),
             ],
           ),
           const SizedBox(height: 10),
           CoffeeButton(
             label: 'Aplicar filtro',
             onPress: () {
-              ct.pagingController.refresh();
+              widget.ct.pagingController.refresh();
               Navigator.of(context).pop();
             },
           ),
