@@ -94,4 +94,15 @@ class MangaController extends ChangeNotifier {
     state = SearchInitialState();
     notifyListeners();
   }
+
+  void clearText() {
+    searchController.clear();
+    if (activeFilters > 0) {
+      pagingController.refresh();
+    } else {
+      state = SearchInitialState();
+    }
+
+    notifyListeners();
+  }
 }
