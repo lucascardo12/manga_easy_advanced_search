@@ -23,12 +23,7 @@ class MangaController extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
 
   void init() {
-    pagingController.addStatusListener((status) {
-      print('status: $status');
-    });
-    pagingController.addPageRequestListener(
-      (pageKey) => fetch(pageKey),
-    );
+    pagingController.addPageRequestListener(_fetch);
     loadingPopularGenders();
   }
 
@@ -57,16 +52,18 @@ class MangaController extends ChangeNotifier {
 
   final int _pageSize = 20;
 
-  void fetch(int pageKey) async {
+  void _fetch(int pageKey) async {
     try {
-      Helps.log('fetch : \n');
+      Helps.log('fetch : $pageKey\n');
       if (searchController.text.isNotEmpty) {
-        pagingController.refresh();
         mangaFilter.search = searchController.text;
       } else {
         mangaFilter.search = null;
       }
       state = SearchLoadingState();
+      if (pageKey == 0) {
+        notifyListeners();
+      }
       var result = await _mangaRepository.getManga(
         filter: mangaFilter,
         limit: _pageSize,
@@ -89,8 +86,16 @@ class MangaController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void searchFilter() {
+    pagingController.refresh();
+    pagingController.notifyPageRequestListeners(0);
+  }
+
   void clearFilter() {
-    mangaFilter = MangaFilterEntity(genders: []);
+    mangaFilter = MangaFilterEntity(
+      genders: [],
+      search: mangaFilter.search,
+    );
     state = SearchInitialState();
     notifyListeners();
   }

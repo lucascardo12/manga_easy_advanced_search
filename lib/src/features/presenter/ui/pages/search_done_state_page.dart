@@ -18,7 +18,7 @@ class SearchDoneStatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ratie = (MediaQuery.of(context).size.width / 800);
+    var ratie = (MediaQuery.of(context).size.width / 850);
     return selectButton
         ? PagedSliverGrid<int, InfoComicModel>(
             pagingController: ct.pagingController,
@@ -28,8 +28,7 @@ class SearchDoneStatePage extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: ratie,
               crossAxisCount: 3,
-              mainAxisSpacing: 0,
-              crossAxisSpacing: 11,
+              crossAxisSpacing: 10,
             ),
           )
         : PagedSliverList<int, InfoComicModel>(

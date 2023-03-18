@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
@@ -59,25 +60,68 @@ class _SearchPageState extends State<SearchPage> {
           slivers: [
             SliverAppBarSearchAndFilter(ct: _controller),
             SliverToBoxAdapter(
-              child: Visibility(
-                visible: _controller.activeFilters > 0,
-                child: Column(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 5,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CoffeeText(
-                            text:
-                                'Você tem ${_controller.activeFilters} filtros ativos'),
-                        const SizedBox(height: 5),
-                        GestureDetector(
-                          onTap: _controller.clearFilter,
-                          child: Icon(Icons.clear,
-                              color: ThemeService.of.primaryColor),
+                    _controller.activeFilters > 0
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              CoffeeText(
+                                text:
+                                    'Você tem ${_controller.activeFilters} filtros ativos',
+                              ),
+                              const SizedBox(height: 5),
+                              GestureDetector(
+                                onTap: _controller.clearFilter,
+                                child: Icon(Icons.clear,
+                                    color: ThemeService.of.backgroundIcon),
+                              ),
+                            ],
+                          )
+                        : const SizedBox(),
+                    GestureDetector(
+                      onTap: () => showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: ThemeService.of.backgroundColor,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20)),
                         ),
-                        const SizedBox(width: 10),
-                      ],
+                        builder: (BuildContext context) {
+                          return FilterBottonSheet(ct: _controller);
+                        },
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: ThemeService.of.primaryColor,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: ThemeService.of.backgroundIcon,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const CoffeeText(text: 'Filtro'),
+                            const SizedBox(width: 3),
+                            Icon(
+                              Icons.filter_alt,
+                              size: 14,
+                              color: ThemeService.of.primaryText,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -87,10 +131,13 @@ class _SearchPageState extends State<SearchPage> {
               builder: (_) {
                 final state = _controller.state;
                 if (state is SearchDoneState) {
-                  return SearchDoneStatePage(
-                    ct: _controller,
-                    selectButton: selectButton,
-                    data: state.mangas,
+                  return SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    sliver: SearchDoneStatePage(
+                      ct: _controller,
+                      selectButton: selectButton,
+                      data: state.mangas,
+                    ),
                   );
                 }
                 if (state is SearchInitialState) {

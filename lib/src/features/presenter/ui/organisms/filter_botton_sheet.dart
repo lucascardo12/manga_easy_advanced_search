@@ -35,22 +35,13 @@ class _FilterBottonSheetState extends State<FilterBottonSheet> {
               IconButton(
                   onPressed: () {
                     setState(() {
-                      widget.ct.mangaFilter = MangaFilterEntity(genders: []);
-                      widget.ct.pagingController.refresh();
+                      widget.ct.clearFilter();
                     });
                   },
                   icon: const Icon(Icons.replay_outlined)),
             ],
           ),
           SelectGenderBottonSheet(ct: widget.ct),
-          //const SizedBox(height: 15),
-          // const CoffeeText(
-          //   text: 'Avaliação',
-          // ),
-          // const SizedBox(height: 10),
-          // CoffeeRating(
-          //   onRatingUpdate: (_) {},
-          // ),
           const SizedBox(height: 15),
           Row(
             children: [
@@ -63,8 +54,8 @@ class _FilterBottonSheetState extends State<FilterBottonSheet> {
           CoffeeButton(
             label: 'Aplicar filtro',
             onPress: () {
-              widget.ct.pagingController.refresh();
-              Navigator.of(context).pop();
+              widget.ct.searchFilter();
+              Navigator.pop(context);
             },
           ),
           const SizedBox(height: 10),
