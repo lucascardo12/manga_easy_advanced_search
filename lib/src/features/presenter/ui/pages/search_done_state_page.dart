@@ -19,58 +19,26 @@ class SearchDoneStatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var ratie = (MediaQuery.of(context).size.width / 800);
-    return PagedSliverList<int, InfoComicModel>(
-      pagingController: ct.pagingController,
-      builderDelegate: PagedChildBuilderDelegate<InfoComicModel>(
-        itemBuilder: (context, item, index) => MangaInfoSearch(
-          manga: item,
-        ),
-      ),
-    );
-    // return widget.selectButton
-    //     ? GridView.builder(
-    //         physics: const BouncingScrollPhysics(),
-    //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-    //           childAspectRatio: ratie,
-    //           crossAxisCount: 3,
-    //           mainAxisSpacing: 6,
-    //           crossAxisSpacing: 7,
-    //         ),
-    //         itemBuilder: (_, idx) {
-    //           if (idx >= widget.data.length - 1) {
-    //             widget.ct.pag += 20;
-    //             widget.ct.fetch();
-    //           }
-    //           return MangaContainerGridView(data: widget.data[idx]);
-    //         },
-    //         itemCount: widget.data.length,
-    //       )
-    //     : NotificationListener<ScrollEndNotification>(
-    //         onNotification: (scrollEnd) {
-    //           final metrics = scrollEnd.metrics;
-    //           print('At the top');
-    //           if (metrics.atEdge) {
-    //             bool isTop = metrics.pixels == 0;
-    //             if (isTop) {
-    //               print('At the top');
-    //             }
-    //           }
-    //           return true;
-    //         },
-    //         child: SliverList(
-    //           delegate: SliverChildBuilderDelegate(
-    //             (context, index) {
-    //               // if (index >= widget.data.length - 1) {
-    //               //   widget.ct.pag += 20;
-    //               //   widget.ct.fetch();
-    //               // }
-    //               return MangaInfoSearch(
-    //                 manga: widget.data[index],
-    //               );
-    //             },
-    //             childCount: widget.data.length,
-    //           ),
-    //         ),
-    //       );
+    return selectButton
+        ? PagedSliverGrid<int, InfoComicModel>(
+            pagingController: ct.pagingController,
+            builderDelegate: PagedChildBuilderDelegate<InfoComicModel>(
+                itemBuilder: (context, item, index) =>
+                    MangaContainerGridView(data: item)),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: ratie,
+              crossAxisCount: 3,
+              mainAxisSpacing: 0,
+              crossAxisSpacing: 11,
+            ),
+          )
+        : PagedSliverList<int, InfoComicModel>(
+            pagingController: ct.pagingController,
+            builderDelegate: PagedChildBuilderDelegate<InfoComicModel>(
+              itemBuilder: (context, item, index) => MangaInfoSearch(
+                manga: item,
+              ),
+            ),
+          );
   }
 }
