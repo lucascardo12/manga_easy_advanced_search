@@ -1,6 +1,6 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/share/routes/external_routes.dart';
+import 'package:manga_easy_advanced_search/src/microapp/routes/external_routes.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/atomic/description_manga.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/atomic/name_and_author_manga.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/atomic/genre_manga.dart';
