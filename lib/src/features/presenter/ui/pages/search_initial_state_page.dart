@@ -10,8 +10,8 @@ class SearchInitialStatePage extends StatelessWidget {
       children: [
         CoffeeImage.unicorn(
           AssetsUnicorn.lendo,
-          width: 100,
-          height: 100,
+          width: 125,
+          height: 125,
         ),
         const CoffeeText(text: 'Tente pesquisar algo')
       ],

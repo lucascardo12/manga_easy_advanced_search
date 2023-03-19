@@ -2,21 +2,19 @@ import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 
 class SearchErrorStatePage extends StatelessWidget {
-  final String message;
-  const SearchErrorStatePage({super.key, required this.message});
+  const SearchErrorStatePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CoffeeImage.unicorn(
           AssetsUnicorn.fire,
-          width: 100,
-          height: 100,
+          width: 125,
+          height: 125,
         ),
-        CoffeeText(text: message)
+        const CoffeeText(text: 'Aconteceu algum erro, tente novamente')
       ],
     );
   }
