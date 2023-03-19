@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/entities/key_pref_enum.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/service/service_pref.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
@@ -9,9 +11,11 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaController extends ChangeNotifier {
   final MangaRepository _mangaRepository;
+  final ServicePrefs _servicePrefs;
   final GetPopularGenresUseCase getPopularGenderCase;
 
-  MangaController(this._mangaRepository, this.getPopularGenderCase);
+  MangaController(
+      this._mangaRepository, this.getPopularGenderCase, this._servicePrefs);
 
   MangaFilterEntity mangaFilter = MangaFilterEntity(genders: []);
 
@@ -22,9 +26,22 @@ class MangaController extends ChangeNotifier {
 
   TextEditingController searchController = TextEditingController();
 
-  void init() {
+  bool selectButton = false;
+
+  void savePref() async {
+    selectButton = !selectButton;
+    await _servicePrefs.savePref(KeyPrefsEnum.selectLayoutSearch, selectButton);
+  }
+
+  Future<bool> readPref() async {
+    return await _servicePrefs.readPref(KeyPrefsEnum.selectLayoutSearch);
+  }
+
+  void init() async {
     pagingController.addPageRequestListener(_fetch);
+    selectButton = await readPref();
     loadingPopularGenders();
+    notifyListeners();
   }
 
   @override

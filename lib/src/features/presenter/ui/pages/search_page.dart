@@ -1,15 +1,11 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_not_found_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
@@ -22,7 +18,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  bool selectButton = false;
   final MangaController _controller = GetIt.I();
 
   @override
@@ -47,11 +42,11 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            selectButton = !selectButton;
+            _controller.savePref();
           });
         },
         backgroundColor: ThemeService.of.primaryColor,
-        child: selectButton
+        child: _controller.selectButton
             ? Icon(Icons.view_stream, color: ThemeService.of.primaryText)
             : Icon(Icons.apps, color: ThemeService.of.primaryText),
       ),
@@ -135,7 +130,7 @@ class _SearchPageState extends State<SearchPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     sliver: SearchDoneStatePage(
                       ct: _controller,
-                      selectButton: selectButton,
+                      selectButton: _controller.selectButton,
                       data: state.mangas,
                     ),
                   );
@@ -145,11 +140,7 @@ class _SearchPageState extends State<SearchPage> {
                     child: SearchInitialStatePage(),
                   );
                 }
-                if (state is SearchNotfoundState) {
-                  return SliverToBoxAdapter(
-                    child: SearchNotFoundStatePage(message: state.message),
-                  );
-                }
+
                 return const SliverToBoxAdapter(
                   child: Center(
                     child: CircularProgressIndicator(),
