@@ -2,6 +2,7 @@ import 'package:client_driver/client_driver.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource.dart';
 import 'package:manga_easy_advanced_search/src/features/data/dtos/manga_dto.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
+import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaDatasourceV1 extends MangaDatasource {
   final DriverHttp _clientDriver;
@@ -31,6 +32,9 @@ class MangaDatasourceV1 extends MangaDatasource {
 
     if (filter.author != null) {
       params += 'author=${filter.author}&';
+    }
+    if (Global.filterContentOver18) {
+      params += 'isAdult=${Global.filterContentOver18}&';
     }
     var result = await _clientDriver.get(
       path: '$url/$version/$path?limit=$limit&offset=$offset&$params',
