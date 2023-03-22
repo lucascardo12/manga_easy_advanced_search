@@ -17,7 +17,7 @@ dependencies:
   manga_easy_sdk:
     git:
       url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v1.2.0
+      ref: v1.2.1
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
