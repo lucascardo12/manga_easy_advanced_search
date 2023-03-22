@@ -1,6 +1,6 @@
 name: manga_easy_advanced_search
 description: A new Flutter package project.
-version: 0.0.1
+version: 1.0.0
 homepage:
 publish_to: none
 
@@ -17,16 +17,16 @@ dependencies:
   manga_easy_sdk:
     git:
       url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v.0.11.x
+      ref: v1.2.0
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v0.11.x
+      ref: v1.0.0
   get_it: ^7.2.0
   manga_easy_routes:
     git:
       url: https://github.com/manga-easy/manga_easy_routes.git
-      ref: v0.11.x
+      ref: v0.0.2
   client_driver:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
