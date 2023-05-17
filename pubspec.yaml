@@ -1,7 +1,6 @@
 name: manga_easy_advanced_search
 description: A new Flutter package project.
 version: 1.0.0
-homepage:
 publish_to: none
 
 environment:
