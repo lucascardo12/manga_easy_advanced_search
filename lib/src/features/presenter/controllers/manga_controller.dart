@@ -105,7 +105,7 @@ class MangaController extends ChangeNotifier {
 
   void searchFilter() {
     pagingController.refresh();
-    pagingController.notifyPageRequestListeners(0);
+    pagingController.notifyPageRequestListeners(_pageSize);
   }
 
   void clearFilter() {
