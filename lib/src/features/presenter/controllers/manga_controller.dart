@@ -113,7 +113,6 @@ class MangaController extends ChangeNotifier {
       genders: [],
       search: mangaFilter.search,
     );
-    pagingController.refresh();
     notifyListeners();
   }
 
