@@ -19,7 +19,7 @@ class MangaDatasourceV1 extends MangaDatasource {
   }) async {
     var params = '';
     if (filter.search != null) {
-      params += 'search=${filter.search}&';
+      params += 'search=${filter.search!.trim()}&';
     }
     if (filter.genders.isNotEmpty) {
       params += 'genders=${filter.genders.join('<>')}&';
