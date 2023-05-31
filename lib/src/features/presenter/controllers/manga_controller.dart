@@ -72,6 +72,7 @@ class MangaController extends ChangeNotifier {
   void _fetch(int pageKey) async {
     try {
       Helps.log('fetch : $pageKey\n');
+      print('AAAAAAAAAAAAAAAAAAAAAAAA');
       if (searchController.text.trim().isNotEmpty) {
         mangaFilter.search = searchController.text.trim();
       } else {
@@ -102,6 +103,7 @@ class MangaController extends ChangeNotifier {
       state = SearchDoneState([]);
     } catch (e, s) {
       Helps.log('error : $e \n $s');
+      print("BBBBBBBBBBBBBBBBBBBBBB");
       pagingController.error = e;
       state = SearchErrorState(e.toString());
     }
@@ -118,6 +120,7 @@ class MangaController extends ChangeNotifier {
       genders: [],
       search: mangaFilter.search,
     );
+    pagingController.refresh();
     notifyListeners();
   }
 
