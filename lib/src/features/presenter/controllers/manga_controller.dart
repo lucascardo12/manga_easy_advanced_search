@@ -72,11 +72,16 @@ class MangaController extends ChangeNotifier {
   void _fetch(int pageKey) async {
     try {
       Helps.log('fetch : $pageKey\n');
-      if (searchController.text.isNotEmpty) {
-        mangaFilter.search = searchController.text;
+
+      if (searchController.text.trim().isNotEmpty) {
+        mangaFilter.search = searchController.text.trim();
       } else {
+        // se nao tiver texto, nao faz a pesquisa e retorna vazio
         mangaFilter.search = null;
+        pagingController.appendLastPage([]);
+        return;
       }
+
       state = SearchLoadingState();
       if (pageKey == 0) {
         notifyListeners();
@@ -96,7 +101,8 @@ class MangaController extends ChangeNotifier {
       }
 
       state = SearchDoneState([]);
-    } catch (e) {
+    } catch (e, s) {
+      print('error : $e \n $s');
       pagingController.error = e;
       state = SearchErrorState(e.toString());
     }
