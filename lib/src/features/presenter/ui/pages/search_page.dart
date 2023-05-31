@@ -5,7 +5,6 @@ import 'package:manga_easy_advanced_search/src/features/presenter/controllers/ma
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
@@ -141,11 +140,7 @@ class _SearchPageState extends State<SearchPage> {
                     child: SearchInitialStatePage(),
                   );
                 }
-                if (state is SearchErrorState) {
-                  return const SliverToBoxAdapter(
-                    child: SearchErrorStatePage(),
-                  );
-                }
+
                 return const SliverToBoxAdapter(
                   child: Center(
                     child: CircularProgressIndicator(),
