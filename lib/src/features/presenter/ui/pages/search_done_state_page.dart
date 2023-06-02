@@ -9,14 +9,13 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class SearchDoneStatePage extends StatelessWidget {
   final bool selectButton;
-  final List<InfoComicModel> data;
   final MangaController ct;
 
-  const SearchDoneStatePage(
-      {super.key,
-      required this.selectButton,
-      required this.data,
-      required this.ct});
+  const SearchDoneStatePage({
+    super.key,
+    required this.selectButton,
+    required this.ct,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +24,13 @@ class SearchDoneStatePage extends StatelessWidget {
         ? PagedSliverGrid<int, InfoComicModel>(
             pagingController: ct.pagingController,
             builderDelegate: PagedChildBuilderDelegate<InfoComicModel>(
-                noItemsFoundIndicatorBuilder: (context) =>
-                    const SearchNotFoundStatePage(),
-                newPageErrorIndicatorBuilder: (context) =>
-                    const SearchErrorStatePage(),
-                itemBuilder: (context, item, index) =>
-                    MangaContainerGridView(data: item)),
+              noItemsFoundIndicatorBuilder: (context) =>
+                  const SearchNotFoundStatePage(),
+              newPageErrorIndicatorBuilder: (context) =>
+                  const SearchErrorStatePage(),
+              itemBuilder: (context, item, index) =>
+                  MangaContainerGridView(data: item),
+            ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: ratie,
               crossAxisCount: 3,

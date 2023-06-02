@@ -5,6 +5,7 @@ import 'package:manga_easy_advanced_search/src/features/presenter/controllers/ma
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
+import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
@@ -24,8 +25,12 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     _controller.init();
-    _controller.addListener(() {
-      setState(() {});
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.addListener(() {
+        if (mounted) {
+          setState(() {});
+        }
+      });
     });
   }
 
@@ -122,31 +127,42 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
-            Builder(
-              builder: (_) {
-                final state = _controller.state;
-                if (state is SearchDoneState) {
-                  return SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    sliver: SearchDoneStatePage(
-                      ct: _controller,
-                      selectButton: _controller.selectButton,
-                      data: state.mangas,
-                    ),
-                  );
-                }
-                if (state is SearchInitialState) {
-                  return const SliverToBoxAdapter(
-                    child: SearchInitialStatePage(),
-                  );
-                }
+            SliverVisibility(
+              visible: _controller.state is SearchDoneState,
+              maintainState: true,
+              sliver: SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                sliver: SearchDoneStatePage(
+                  ct: _controller,
+                  selectButton: _controller.selectButton,
+                ),
+              ),
+            ),
+            SliverVisibility(
+              visible: _controller.state is! SearchDoneState,
+              sliver: SliverFillViewport(
+                padEnds: false,
+                delegate: SliverChildListDelegate(
+                  [
+                    Builder(
+                      builder: (_) {
+                        final state = _controller.state;
+                        if (state is SearchInitialState) {
+                          return const SearchInitialStatePage();
+                        }
+                        if (state is SearchDoneState) {
+                          return const SizedBox.shrink();
+                        }
+                        if (state is SearchErrorState) {
+                          return const SearchErrorStatePage();
+                        }
 
-                return const SliverToBoxAdapter(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              },
+                        return CoffeeImage.cats(AssetsCats.runningCircle);
+                      },
+                    ),
+                  ],
+                ),
+              ),
             )
           ],
         ),
