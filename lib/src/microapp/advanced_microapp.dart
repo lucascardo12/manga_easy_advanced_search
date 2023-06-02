@@ -39,7 +39,7 @@ class AdvancedMicroApp extends MicroApp {
 
     //controllers
     getIt.registerFactory<MangaController>(
-      () => MangaController(getIt(), getIt(), getIt()),
+      () => MangaController(getIt(), getIt(), getIt(), getIt()),
     );
   }
 }

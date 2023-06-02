@@ -4,11 +4,13 @@ version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: ">=2.19.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
+  # Manga Easy Packages
   manga_easy_themes:
     git:
       url: https://github.com/manga-easy/manga_easy_themes.git
@@ -29,14 +31,19 @@ dependencies:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
       ref: v1.1.2
+  manga_easy_crashlytics_service:
+    git:
+      url: https://github.com/manga-easy/manga_easy_crashlytics_service.git
+      ref: v1.0.0
+      
+  # Third Party Packages
   infinite_scroll_pagination: ^3.2.0
   shared_preferences: ^2.0.18
   get_it: ^7.2.0
- 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
 
 flutter:
