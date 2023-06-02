@@ -7,15 +7,21 @@ import 'package:manga_easy_advanced_search/src/features/domain/service/service_p
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
+import 'package:manga_easy_crashlytics_service/manga_easy_crashlytics_service.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaController extends ChangeNotifier {
   final MangaRepository _mangaRepository;
   final ServicePrefs _servicePrefs;
   final GetPopularGenresUseCase getPopularGenderCase;
+  final CrashlyticsService _crashlyticsService;
 
   MangaController(
-      this._mangaRepository, this.getPopularGenderCase, this._servicePrefs);
+    this._mangaRepository,
+    this.getPopularGenderCase,
+    this._servicePrefs,
+    this._crashlyticsService,
+  );
 
   MangaFilterEntity mangaFilter = MangaFilterEntity(genders: []);
 
@@ -71,12 +77,15 @@ class MangaController extends ChangeNotifier {
 
   void _fetch(int pageKey) async {
     try {
-      Helps.log('fetch : $pageKey\n');
-      if (searchController.text.isNotEmpty) {
-        mangaFilter.search = searchController.text;
+      if (searchController.text.trim().isNotEmpty || activeFilters > 0) {
+        mangaFilter.search = searchController.text.trim();
       } else {
+        // se nao tiver texto, nao faz a pesquisa e retorna vazio
         mangaFilter.search = null;
+        pagingController.appendLastPage([]);
+        return;
       }
+
       state = SearchLoadingState();
       if (pageKey == 0) {
         notifyListeners();
@@ -96,7 +105,8 @@ class MangaController extends ChangeNotifier {
       }
 
       state = SearchDoneState([]);
-    } catch (e) {
+    } on Exception catch (e, s) {
+      _crashlyticsService.recordError(e: e, tag: 'AdvancedMicroapp', stack: s);
       pagingController.error = e;
       state = SearchErrorState(e.toString());
     }
@@ -105,7 +115,6 @@ class MangaController extends ChangeNotifier {
 
   void searchFilter() {
     pagingController.refresh();
-    pagingController.notifyPageRequestListeners(0);
   }
 
   void clearFilter() {
@@ -113,7 +122,13 @@ class MangaController extends ChangeNotifier {
       genders: [],
       search: mangaFilter.search,
     );
-    state = SearchInitialState();
+    final search = mangaFilter.search ?? '';
+    if (search.isEmpty) {
+      state = SearchInitialState();
+    } else {
+      pagingController.refresh();
+    }
+
     notifyListeners();
   }
 

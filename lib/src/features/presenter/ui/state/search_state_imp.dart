@@ -11,11 +11,7 @@ class SearchErrorState extends SearchState {
   SearchErrorState(this.message);
 }
 
-class SearchNotfoundState extends SearchState {
-  final String message;
-
-  SearchNotfoundState(this.message);
-}
+class SearchNotfoundState extends SearchState {}
 
 class SearchDoneState extends SearchState {
   final List<InfoComicModel> mangas;

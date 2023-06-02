@@ -7,13 +7,14 @@ class SearchNotFoundStatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CoffeeImage.unicorn(
           AssetsUnicorn.sad,
           width: 125,
           height: 125,
         ),
+        const SizedBox(height: 24),
         const CoffeeText(
           text: 'Não foi possivel encontrar o mangá',
         )

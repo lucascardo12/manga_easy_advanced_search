@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource_v1.dart';
 import 'package:manga_easy_advanced_search/src/features/data/repositories/manga_repository_imp.dart';
-import 'package:manga_easy_advanced_search/src/features/data/service/service_pref_imp.dart';
+import 'package:manga_easy_advanced_search/src/features/data/services/service_pref_imp.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/mappers/mapper_manga.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/service/service_pref.dart';
@@ -39,7 +39,7 @@ class AdvancedMicroApp extends MicroApp {
 
     //controllers
     getIt.registerFactory<MangaController>(
-      () => MangaController(getIt(), getIt(), getIt()),
+      () => MangaController(getIt(), getIt(), getIt(), getIt()),
     );
   }
 }

@@ -5,7 +5,7 @@ import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_fi
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class MangaDatasourceV1 extends MangaDatasource {
-  final DriverHttp _clientDriver;
+  final ClientRequest _clientDriver;
   final String path = 'catalog';
   final String url = 'http://catalog.lucas-cm.com.br';
   final String version = 'v1';
@@ -19,7 +19,7 @@ class MangaDatasourceV1 extends MangaDatasource {
   }) async {
     var params = '';
     if (filter.search != null) {
-      params += 'search=${filter.search}&';
+      params += 'search=${filter.search!.trim()}&';
     }
     if (filter.genders.isNotEmpty) {
       params += 'genders=${filter.genders.join('<>')}&';
