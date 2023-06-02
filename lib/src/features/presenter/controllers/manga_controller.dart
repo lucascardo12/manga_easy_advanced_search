@@ -106,7 +106,7 @@ class MangaController extends ChangeNotifier {
 
       state = SearchDoneState([]);
     } on Exception catch (e, s) {
-      _crashlyticsService.recordError(e: e, tag: '_fetch', stack: s);
+      _crashlyticsService.recordError(e: e, tag: 'AdvancedMicroapp', stack: s);
       pagingController.error = e;
       state = SearchErrorState(e.toString());
     }
