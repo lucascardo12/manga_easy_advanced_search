@@ -71,8 +71,7 @@ class MangaController extends ChangeNotifier {
 
   void _fetch(int pageKey) async {
     try {
-      Helps.log('fetch : $pageKey\n');
-      if (searchController.text.trim().isNotEmpty) {
+      if (searchController.text.trim().isNotEmpty || activeFilters > 0) {
         mangaFilter.search = searchController.text.trim();
       } else {
         // se nao tiver texto, nao faz a pesquisa e retorna vazio
@@ -110,7 +109,6 @@ class MangaController extends ChangeNotifier {
 
   void searchFilter() {
     pagingController.refresh();
-    pagingController.notifyPageRequestListeners(_pageSize);
   }
 
   void clearFilter() {
@@ -118,7 +116,13 @@ class MangaController extends ChangeNotifier {
       genders: [],
       search: mangaFilter.search,
     );
-    pagingController.refresh();
+    final search = mangaFilter.search ?? '';
+    if (search.isEmpty) {
+      state = SearchInitialState();
+    } else {
+      pagingController.refresh();
+    }
+
     notifyListeners();
   }
 
