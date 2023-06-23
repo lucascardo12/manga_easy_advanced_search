@@ -47,7 +47,7 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            _controller.savePref();
+            _controller.saveLayoutPref();
           });
         },
         backgroundColor: ThemeService.of.primaryColor,
@@ -57,6 +57,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: SafeArea(
         child: CustomScrollView(
+          shrinkWrap: true,
           slivers: [
             SliverAppBarSearchAndFilter(ct: _controller),
             SliverToBoxAdapter(
