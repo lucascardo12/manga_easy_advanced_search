@@ -43,7 +43,7 @@ class AllGenders extends StatelessWidget {
           const SizedBox(height: 6),
           CoffeeButton(
             label: 'Aplicar',
-            onPress: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(context),
           )
         ],
       ),
