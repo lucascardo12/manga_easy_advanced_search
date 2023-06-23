@@ -45,7 +45,9 @@ class MangaController extends ChangeNotifier {
   }
 
   void saveSearchHistory(String search) async {
-    if (!searchHistory.contains(search) && searchHistory.length < 5) {
+    if (!searchHistory.contains(search) &&
+        searchHistory.length < 5 &&
+        search.isNotEmpty) {
       searchHistory.add(search);
     }
     await _servicePrefs.put(
@@ -58,7 +60,7 @@ class MangaController extends ChangeNotifier {
         keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
   }
 
-  void removeAllSearchHistory(String search) async {
+  void removeAllSearchHistory() async {
     searchHistory = [];
     await _servicePrefs.put(
         keyPreferences: KeyPreferences.searchHistory, value: searchHistory);

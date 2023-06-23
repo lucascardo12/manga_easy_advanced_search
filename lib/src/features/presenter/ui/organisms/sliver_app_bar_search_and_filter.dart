@@ -16,6 +16,8 @@ class SliverAppBarSearchAndFilter extends StatelessWidget {
         onChanged: (value) => ct.mangaFilter.search = value,
         onEditingComplete: ct.searchFilter,
         onPressedSuffix: ct.clearText,
+        removeHistory: ct.removeSearchHistory,
+        removeAllHistory: ct.removeAllSearchHistory,
       ),
 
       // CoffeeSearchField(
