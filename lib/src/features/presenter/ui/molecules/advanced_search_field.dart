@@ -1,5 +1,6 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class AdvancedSearchField extends StatefulWidget {
@@ -7,6 +8,8 @@ class AdvancedSearchField extends StatefulWidget {
   final Function() onEditingComplete;
   final Function(String) onChanged;
   final Function() onPressedSuffix;
+  final Function(String) removeHistory;
+  final Function() removeAllHistory;
   final int maxHistoryQty;
   final List<String> list;
   const AdvancedSearchField({
@@ -17,6 +20,8 @@ class AdvancedSearchField extends StatefulWidget {
     required this.onEditingComplete,
     required this.onChanged,
     required this.onPressedSuffix,
+    required this.removeHistory,
+    required this.removeAllHistory,
   }) : super(key: key);
 
   @override
@@ -34,6 +39,7 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
         color: ThemeService.of.selectColor,
         borderRadius: ThemeService.of.borderRadius,
       ),
+      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
       alignment: Alignment.topCenter,
       child: SingleChildScrollView(
         // physics: const NeverScrollableScrollPhysics(),
@@ -41,20 +47,29 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
           children: [
             NewCoffeeSearchField(
               hintText: advancedHintText,
-              // TODO: QUANDO PESQUISAR, TAPPAD = FALSE
-
-              onEditingComplete: widget.onEditingComplete,
+              onEditingComplete: () {
+                widget.onEditingComplete();
+                tappad = false;
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
+              },
               onTap: () {
                 setState(() {
                   tappad = true;
                 });
               },
-              onChanged: widget.onChanged,
+              onChanged: (value) {
+                widget.onChanged(value);
+                tappad = true;
+                setState(() {});
+              },
               suffixIcon: Padding(
                   padding: const EdgeInsets.only(right: 6),
                   child: IconButton(
                     icon: const Icon(Icons.clear),
-                    onPressed: widget.onPressedSuffix,
+                    onPressed: () {
+                      widget.onPressedSuffix();
+                      tappad = false;
+                    },
                   )),
               controller: widget.textCt,
             ),
@@ -77,6 +92,10 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                             onTap: () {
                               widget.textCt.text = widget.list[index];
                               widget.onEditingComplete();
+                              tappad = false;
+                              SystemChannels.textInput
+                                  .invokeMethod('TextInput.hide');
+                              setState(() {});
                             },
                             child: Row(
                               children: [
@@ -94,11 +113,12 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                             ),
                           ),
                           CoffeeIconButton(
-                            // TODO: REMOVER TAMBÉM NO BANCO
                             onTap: () {
-                              setState(() {
-                                widget.list.removeAt(index);
-                              });
+                              var history = widget.list[index];
+                              widget.removeHistory(history);
+                              widget.list
+                                  .removeWhere((element) => element == history);
+                              setState(() {});
                             },
                             size: 24,
                             icon: Icons.delete,
@@ -110,18 +130,16 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(
-                      width: 80,
+                      width: 100,
                       child: CoffeeButtonText(
-                        text: 'Limpar',
+                        text: 'Limpar tudo',
                         color: ThemeService.of.backgroundIcon,
                         onPressed: () {
                           advancedHintText = 'Pesquise seus mangás favoritos';
-                          // TODO: REMOVER TAMBÉM NO BANCO
-
-                          setState(() {
-                            widget.list.removeWhere((element) => true);
-                            tappad = false;
-                          });
+                          widget.removeAllHistory();
+                          widget.list.removeWhere((element) => true);
+                          tappad = false;
+                          setState(() {});
                         },
                       ),
                     ),
