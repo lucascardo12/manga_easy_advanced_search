@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/entities/key_pref_enum.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/service/service_pref.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_crashlytics_service/manga_easy_crashlytics_service.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
+import 'package:persistent_database/persistent_database.dart';
 
 class MangaController extends ChangeNotifier {
   final MangaRepository _mangaRepository;
-  final ServicePrefs _servicePrefs;
+  final Preference _servicePrefs;
   final GetPopularGenresUseCase getPopularGenderCase;
   final CrashlyticsService _crashlyticsService;
 
@@ -31,21 +30,49 @@ class MangaController extends ChangeNotifier {
       PagingController(firstPageKey: 0);
 
   TextEditingController searchController = TextEditingController();
-
   bool selectButton = false;
+  List<String> searchHistory = [];
 
-  void savePref() async {
+  void saveLayoutPref() async {
     selectButton = !selectButton;
-    await _servicePrefs.savePref(KeyPrefsEnum.selectLayoutSearch, selectButton);
+    await _servicePrefs.put(
+        keyPreferences: KeyPreferences.selectLayoutSearch, value: selectButton);
   }
 
-  Future<bool> readPref() async {
-    return await _servicePrefs.readPref(KeyPrefsEnum.selectLayoutSearch);
+  Future<bool> readLayoutPref() async {
+    return await _servicePrefs.get<bool>(
+        keyPreferences: KeyPreferences.selectLayoutSearch);
+  }
+
+  void saveSearchHistory(String search) async {
+    if (!searchHistory.contains(search) && searchHistory.length < 5) {
+      searchHistory.add(search);
+    }
+    await _servicePrefs.put(
+        keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
+  }
+
+  void removeSearchHistory(String search) async {
+    searchHistory.removeWhere((e) => e == search);
+    await _servicePrefs.put(
+        keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
+  }
+
+  void removeAllSearchHistory(String search) async {
+    searchHistory = [];
+    await _servicePrefs.put(
+        keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
+  }
+
+  Future<List<String>> readSearchHistory() async {
+    return List.from(
+        await _servicePrefs.get(keyPreferences: KeyPreferences.searchHistory));
   }
 
   void init() async {
     pagingController.addPageRequestListener(_fetch);
-    selectButton = await readPref();
+    selectButton = await readLayoutPref();
+    searchHistory = await readSearchHistory();
     loadingPopularGenders();
     notifyListeners();
   }
@@ -79,6 +106,7 @@ class MangaController extends ChangeNotifier {
     try {
       if (searchController.text.trim().isNotEmpty || activeFilters > 0) {
         mangaFilter.search = searchController.text.trim();
+        saveSearchHistory(mangaFilter.search!);
       } else {
         // se nao tiver texto, nao faz a pesquisa e retorna vazio
         mangaFilter.search = null;
