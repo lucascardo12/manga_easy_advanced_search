@@ -19,18 +19,6 @@ class SliverAppBarSearchAndFilter extends StatelessWidget {
         removeHistory: ct.removeSearchHistory,
         removeAllHistory: ct.removeAllSearchHistory,
       ),
-
-      // CoffeeSearchField(
-      //   onEditingComplete: ct.searchFilter,
-      //   controller: ct.searchController,
-      //   showBackOnly: true,
-      //   suffixIcon: Padding(
-      //       padding: const EdgeInsets.only(right: 6),
-      //       child: IconButton(
-      //         icon: const Icon(Icons.clear),
-      //         onPressed: ct.clearText,
-      //       )),
-      // ),
     );
   }
 }
