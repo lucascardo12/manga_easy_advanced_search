@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/repositories/search_repository.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
@@ -10,6 +11,7 @@ import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:persistent_database/persistent_database.dart';
 
 class MangaController extends ChangeNotifier {
+  final SearchHistoryRepository _searchHistoryImp;
   final MangaRepository _mangaRepository;
   final Preference _servicePrefs;
   final GetPopularGenresUseCase getPopularGenderCase;
@@ -18,8 +20,9 @@ class MangaController extends ChangeNotifier {
   MangaController(
     this._mangaRepository,
     this.getPopularGenderCase,
-    this._servicePrefs,
+    this._searchHistoryImp,
     this._crashlyticsService,
+    this._servicePrefs,
   );
 
   MangaFilterEntity mangaFilter = MangaFilterEntity(genders: []);
@@ -44,31 +47,20 @@ class MangaController extends ChangeNotifier {
         keyPreferences: KeyPreferences.selectLayoutSearch);
   }
 
-  void saveSearchHistory(String search) async {
-    if (!searchHistory.contains(search) &&
-        searchHistory.length < 5 &&
-        search.isNotEmpty) {
-      searchHistory.add(search);
-    }
-    await _servicePrefs.put(
-        keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
+  Future<void> saveSearchHistory(String search) async {
+    await _searchHistoryImp.saveSearchHistory(search, searchHistory);
   }
 
-  void removeSearchHistory(String search) async {
-    searchHistory.removeWhere((e) => e == search);
-    await _servicePrefs.put(
-        keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
+  Future<void> removeSearchHistory(String search) async {
+    await _searchHistoryImp.removeSearchHistory(search, searchHistory);
   }
 
-  void removeAllSearchHistory() async {
-    searchHistory = [];
-    await _servicePrefs.put(
-        keyPreferences: KeyPreferences.searchHistory, value: searchHistory);
+  Future<void> removeAllSearchHistory() async {
+    await _searchHistoryImp.removeAllSearchHistory(searchHistory);
   }
 
   Future<List<String>> readSearchHistory() async {
-    return List.from(
-        await _servicePrefs.get(keyPreferences: KeyPreferences.searchHistory));
+    return await _searchHistoryImp.readSearchHistory(searchHistory);
   }
 
   void init() async {
