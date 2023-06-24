@@ -63,10 +63,16 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                 tappad = true;
                 setState(() {});
               },
+              prefixIcon: Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_rounded),
+                    onPressed: () => Navigator.pop(context),
+                  )),
               suffixIcon: Padding(
                   padding: const EdgeInsets.only(right: 6),
                   child: IconButton(
-                    icon: const Icon(Icons.clear),
+                    icon: const Icon(Icons.clear_rounded),
                     onPressed: () {
                       widget.onPressedSuffix();
                       tappad = false;
@@ -101,7 +107,7 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                             child: Row(
                               children: [
                                 const Icon(
-                                  Icons.refresh,
+                                  Icons.refresh_rounded,
                                   size: 24,
                                 ),
                                 const SizedBox(
@@ -122,7 +128,7 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                               setState(() {});
                             },
                             size: 24,
-                            icon: Icons.delete,
+                            icon: Icons.delete_forever_outlined,
                           )
                         ],
                       ),
