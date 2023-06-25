@@ -90,7 +90,7 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                         ? widget.list.length
                         : widget.maxHistoryQty,
                     itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -105,9 +105,10 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                             },
                             child: Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.refresh_rounded,
                                   size: 24,
+                                  color: ThemeService.of.backgroundIcon,
                                 ),
                                 const SizedBox(
                                   width: 8,
@@ -139,7 +140,7 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                       width: 100,
                       child: CoffeeButtonText(
                         text: 'Limpar tudo',
-                        color: ThemeService.of.backgroundIcon,
+                        color: ThemeService.of.backgroundText,
                         onPressed: () {
                           advancedHintText = 'Pesquise seus mangás favoritos';
                           widget.removeAllHistory();
