@@ -29,10 +29,15 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
 
   @override
   Future<void> saveSearchHistory(
-      String search, List<String> searchHistory) async {
-    if (!searchHistory.contains(search) &&
-        searchHistory.length < 5 &&
-        search.isNotEmpty) {
+      String search, List<String> searchHistory, int maxHistoryQty) async {
+    if (!searchHistory.contains(search) && search.isNotEmpty) {
+      searchHistory.add(search);
+      if (searchHistory.length == maxHistoryQty + 1) {
+        removeSearchHistory(searchHistory[0], searchHistory);
+      }
+    }
+    if (searchHistory.contains(search)) {
+      searchHistory.removeWhere((e) => e == search);
       searchHistory.add(search);
     }
     await _servicePrefs.put(
