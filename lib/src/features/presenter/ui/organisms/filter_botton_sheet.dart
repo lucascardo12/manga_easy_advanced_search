@@ -52,7 +52,7 @@ class _FilterBottonSheetState extends State<FilterBottonSheet> {
           const SizedBox(height: 10),
           CoffeeButton(
             label: 'Aplicar filtro',
-            onPress: () {
+            onPressed: () {
               widget.ct.searchFilter();
               Navigator.pop(context);
             },

@@ -3,10 +3,10 @@ import 'package:get_it/get_it.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource.dart';
 import 'package:manga_easy_advanced_search/src/features/data/datasources/manga_datasource_v1.dart';
 import 'package:manga_easy_advanced_search/src/features/data/repositories/manga_repository_imp.dart';
-import 'package:manga_easy_advanced_search/src/features/data/services/service_pref_imp.dart';
+import 'package:manga_easy_advanced_search/src/features/data/repositories/search_repository_imp.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/mappers/mapper_manga.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/service/service_pref.dart';
+import 'package:manga_easy_advanced_search/src/features/domain/repositories/search_repository.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
 import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case_imp.dart';
 import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_page.dart';
@@ -22,8 +22,6 @@ class AdvancedMicroApp extends MicroApp {
   void registerDependencies() {
     //mappers
     getIt.registerFactory(() => MapperManga());
-    //service
-    getIt.registerFactory<ServicePrefs>(() => ServicePrefsImp());
 
     //datasource
     getIt.registerFactory<MangaDatasource>(() => MangaDatasourceV1(getIt()));
@@ -32,6 +30,9 @@ class AdvancedMicroApp extends MicroApp {
     getIt.registerFactory<MangaRepository>(
       () => MangaRepositoryImp(getIt(), getIt()),
     );
+    getIt.registerFactory<SearchHistoryRepository>(
+      () => SearchHistoryRepositoryImp(getIt()),
+    );
 
     //usecases
     getIt.registerFactory<GetPopularGenresUseCase>(
@@ -39,7 +40,7 @@ class AdvancedMicroApp extends MicroApp {
 
     //controllers
     getIt.registerFactory<MangaController>(
-      () => MangaController(getIt(), getIt(), getIt(), getIt()),
+      () => MangaController(getIt(), getIt(), getIt(), getIt(), getIt()),
     );
   }
 }

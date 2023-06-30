@@ -22,7 +22,7 @@ dependencies:
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v1.1.0
+      ref: v1.3.0
   manga_easy_routes:
     git:
       url: https://github.com/manga-easy/manga_easy_routes.git
@@ -35,7 +35,11 @@ dependencies:
     git:
       url: https://github.com/manga-easy/manga_easy_crashlytics_service.git
       ref: v1.0.0
-      
+  persistent_database:
+   git: 
+    url: https://github.com/manga-easy/lib_persistent_database.git
+    ref: v1.2.2
+
   # Third Party Packages
   infinite_scroll_pagination: ^3.2.0
   shared_preferences: ^2.0.18

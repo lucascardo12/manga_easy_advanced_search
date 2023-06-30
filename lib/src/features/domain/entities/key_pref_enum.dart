@@ -1,3 +1,0 @@
-enum KeyPrefsEnum{
-  selectLayoutSearch
-}
