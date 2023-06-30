@@ -32,7 +32,7 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
       String search, List<String> searchHistory, int maxHistoryQty) async {
     if (!searchHistory.contains(search) && search.isNotEmpty) {
       searchHistory.add(search);
-      if (searchHistory.length == maxHistoryQty + 1) {
+      if (searchHistory.length > maxHistoryQty) {
         removeSearchHistory(searchHistory[0], searchHistory);
       }
     }
