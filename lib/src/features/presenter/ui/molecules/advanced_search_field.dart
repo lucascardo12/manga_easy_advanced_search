@@ -15,7 +15,7 @@ class AdvancedSearchField extends StatefulWidget {
   const AdvancedSearchField({
     Key? key,
     required this.textCt,
-    this.maxHistoryQty = 7,
+    required this.maxHistoryQty,
     required this.list,
     required this.onEditingComplete,
     required this.onChanged,
@@ -89,6 +89,7 @@ class _AdvancedSearchFieldState extends State<AdvancedSearchField> {
                     itemCount: widget.list.length <= widget.maxHistoryQty
                         ? widget.list.length
                         : widget.maxHistoryQty,
+                    reverse: true,
                     itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
                       child: Row(

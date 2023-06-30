@@ -10,7 +10,7 @@ class SliverAppBarSearchAndFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: AdvancedSearchField(
-        maxHistoryQty: 5,
+        maxHistoryQty: ct.maxHistoryQty,
         textCt: ct.searchController,
         list: ct.searchHistory,
         onChanged: (value) => ct.mangaFilter.search = value,

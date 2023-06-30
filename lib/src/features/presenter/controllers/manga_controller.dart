@@ -31,10 +31,10 @@ class MangaController extends ChangeNotifier {
   List<GenerosModel> popularGender = [];
   final PagingController<int, InfoComicModel> pagingController =
       PagingController(firstPageKey: 0);
-
   TextEditingController searchController = TextEditingController();
   bool selectButton = false;
   List<String> searchHistory = [];
+  int maxHistoryQty = 5;
 
   void saveLayoutPref() async {
     selectButton = !selectButton;
@@ -48,7 +48,8 @@ class MangaController extends ChangeNotifier {
   }
 
   Future<void> saveSearchHistory(String search) async {
-    await _searchHistoryImp.saveSearchHistory(search, searchHistory);
+    await _searchHistoryImp.saveSearchHistory(
+        search, searchHistory, maxHistoryQty);
   }
 
   Future<void> removeSearchHistory(String search) async {
