@@ -14,10 +14,13 @@ class AllGenders extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.5,
       padding: const EdgeInsets.all(5),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 15),
-          const CoffeeText(
-              text: 'Selecionar gêneros', typography: CoffeeTypography.title),
+          const Center(
+            child: CoffeeText(
+                text: 'Selecionar gêneros', typography: CoffeeTypography.title),
+          ),
           const SizedBox(height: 15),
           Expanded(
             flex: 4,
