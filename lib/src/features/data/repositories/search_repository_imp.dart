@@ -1,5 +1,5 @@
 import 'package:persistent_database/persistent_database.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/repositories/search_repository.dart';
+import 'package:advanced_search/src/features/domain/repositories/search_repository.dart';
 
 class SearchHistoryRepositoryImp implements SearchHistoryRepository {
   final Preference _servicePrefs;

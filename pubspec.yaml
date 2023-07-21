@@ -1,10 +1,10 @@
-name: manga_easy_advanced_search
-description: A new Flutter package project.
-version: 1.0.0
+name: advanced_search
+description: MicroApp de pesquisa avançada.
+version: 1.1.1
 publish_to: none
 
 environment:
-  sdk: ">=2.19.2 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -16,17 +16,16 @@ dependencies:
       url: https://github.com/manga-easy/manga_easy_themes.git
       ref: 1.0.2
   manga_easy_sdk:
-    git:
-      url: https://github.com/manga-easy/manga_easy_sdk.git
-      ref: v1.3.0
+    path: ../manga_easy_sdk
   coffee_cup:
+    # path: ../manga_easy_coffee_cup
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
       ref: v1.3.0
   manga_easy_routes:
     git:
       url: https://github.com/manga-easy/manga_easy_routes.git
-      ref: v1.0.2
+      ref: v1.0.3
   client_driver:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
@@ -38,7 +37,7 @@ dependencies:
   persistent_database:
    git: 
     url: https://github.com/manga-easy/lib_persistent_database.git
-    ref: v1.2.2
+    ref: v1.2.5
 
   # Third Party Packages
   infinite_scroll_pagination: ^3.2.0

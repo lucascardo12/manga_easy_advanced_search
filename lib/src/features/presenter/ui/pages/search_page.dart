@@ -1,13 +1,13 @@
 import 'package:coffee_cup/coffe_cup.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
+import 'package:advanced_search/src/features/presenter/controllers/manga_controller.dart';
+import 'package:advanced_search/src/features/presenter/ui/organisms/filter_botton_sheet.dart';
+import 'package:advanced_search/src/features/presenter/ui/organisms/sliver_app_bar_search_and_filter.dart';
+import 'package:advanced_search/src/features/presenter/ui/pages/search_done_state_page.dart';
+import 'package:advanced_search/src/features/presenter/ui/pages/search_error_state_page.dart';
+import 'package:advanced_search/src/features/presenter/ui/pages/search_initial_state_page.dart';
+import 'package:advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_themes/manga_easy_themes.dart';
 
 class SearchPage extends StatefulWidget {

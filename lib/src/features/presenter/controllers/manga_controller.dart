@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/repositories/manga_repository.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/repositories/search_repository.dart';
-import 'package:manga_easy_advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
+import 'package:advanced_search/src/features/domain/entities/manga_filter_entity.dart';
+import 'package:advanced_search/src/features/domain/repositories/manga_repository.dart';
+import 'package:advanced_search/src/features/domain/repositories/search_repository.dart';
+import 'package:advanced_search/src/features/domain/usecases/get_popular_genres_use_case.dart';
+import 'package:advanced_search/src/features/presenter/ui/state/search_state.dart';
+import 'package:advanced_search/src/features/presenter/ui/state/search_state_imp.dart';
 import 'package:manga_easy_crashlytics_service/manga_easy_crashlytics_service.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 import 'package:persistent_database/persistent_database.dart';

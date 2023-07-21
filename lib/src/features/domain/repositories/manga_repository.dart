@@ -1,4 +1,4 @@
-import 'package:manga_easy_advanced_search/src/features/domain/entities/manga_filter_entity.dart';
+import 'package:advanced_search/src/features/domain/entities/manga_filter_entity.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 abstract class MangaRepository {

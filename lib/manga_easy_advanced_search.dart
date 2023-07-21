@@ -1,3 +1,3 @@
-library manga_easy_advanced_search;
+library advanced_search;
 
 export 'src/microapp/advanced_microapp.dart';

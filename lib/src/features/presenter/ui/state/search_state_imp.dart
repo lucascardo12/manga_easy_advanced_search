@@ -1,4 +1,4 @@
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/state/search_state.dart';
+import 'package:advanced_search/src/features/presenter/ui/state/search_state.dart';
 import 'package:manga_easy_sdk/manga_easy_sdk.dart';
 
 class SearchInitialState extends SearchState {}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/controllers/manga_controller.dart';
-import 'package:manga_easy_advanced_search/src/features/presenter/ui/molecules/advanced_search_field.dart';
+import 'package:advanced_search/src/features/presenter/controllers/manga_controller.dart';
+import 'package:advanced_search/src/features/presenter/ui/molecules/advanced_search_field.dart';
 
 class SliverAppBarSearchAndFilter extends StatelessWidget {
   final MangaController ct;
