@@ -22,7 +22,7 @@ dependencies:
   coffee_cup:
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
-      ref: v1.3.0
+      ref: v1.3.2
   manga_easy_routes:
     git:
       url: https://github.com/manga-easy/manga_easy_routes.git
