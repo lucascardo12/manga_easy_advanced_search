@@ -14,9 +14,9 @@ class MangaRepositoryImp implements MangaRepository {
     this._clientDriver,
     this._apiResponseParser,
   );
-  final String path = 'catalog';
-  final String url = 'http://catalog.lucas-cm.com.br';
+  final String url = AppUrl.catalog;
   final String version = 'v1';
+  final String path = 'catalog';
 
   @override
   Future<List<InfoComicModel>> getManga({
