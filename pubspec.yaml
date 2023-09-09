@@ -1,6 +1,6 @@
 name: advanced_search
 description: MicroApp de pesquisa avançada.
-version: 1.1.1
+version: 1.2.0
 publish_to: none
 
 environment:
@@ -16,9 +16,10 @@ dependencies:
       url: https://github.com/manga-easy/manga_easy_themes.git
       ref: 1.0.2
   manga_easy_sdk:
-    path: ../manga_easy_sdk
+    git:
+      url: https://github.com/manga-easy/manga_easy_sdk.git
+      ref: v1.6.0
   coffee_cup:
-    # path: ../manga_easy_coffee_cup
     git:
       url: https://github.com/manga-easy/manga_easy_coffee_cup.git
       ref: v1.3.2
@@ -29,7 +30,7 @@ dependencies:
   client_driver:
     git:
       url: https://github.com/manga-easy/manga_easy_client_driver.git
-      ref: v1.1.2
+      ref: v1.2.3
   manga_easy_crashlytics_service:
     git:
       url: https://github.com/manga-easy/manga_easy_crashlytics_service.git
