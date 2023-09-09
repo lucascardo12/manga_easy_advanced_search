@@ -24,7 +24,7 @@ class _FilterBottonSheetState extends State<FilterBottonSheet> {
         top: 16,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(

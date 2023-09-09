@@ -1,4 +1,5 @@
 import 'package:coffee_cup/coffe_cup.dart';
+import 'package:coffee_cup/features/fields/styles/field_text.dart';
 import 'package:flutter/material.dart';
 import 'package:advanced_search/src/features/presenter/controllers/manga_controller.dart';
 
@@ -20,9 +21,7 @@ class SelectAuthorBottonSheet extends StatelessWidget {
           ),
           CoffeeField(
             onChanged: (e) => ct.mangaFilter.author = e,
-            hintText: 'Nome do Autor',
-            height: 44,
-            contentPadding: const EdgeInsets.only(left: 14),
+            fieldText: FieldText(hintText: 'Nome do Autor'),
           ),
         ],
       ),
